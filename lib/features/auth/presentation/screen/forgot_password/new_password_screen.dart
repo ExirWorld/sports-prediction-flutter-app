@@ -33,12 +33,12 @@ class NewPasswordScreen extends StatelessWidget {
               Assets.images.changePassword.svg(),
               const VerticalSpace(vertical_spacing_10x),
               const VeryHugeBoldText(
-                'تغییر رمز عبور',
+                'Change Password',
                 textColorInLight: Color(0xff02629F),
               ),
               const VerticalSpace(vertical_spacing_3x),
               const SmallBoldText(
-                'رمز عبور جدید را وارد کنید',
+                'Enter the new password',
                 textColorInLight: Color(0xff302E43),
               ),
               const VerticalSpace(vertical_spacing_4x),
@@ -97,7 +97,7 @@ class NewPasswordScreen extends StatelessWidget {
                       child: state is ChangePasswordLoadingState
                           ? const CupertinoActivityIndicator(color: WHITE_COLOR)
                           : const LargeBoldText(
-                              'تغییر رمز',
+                              'Change Password',
                               textColorInLight: TEXT_LIGHT_COLOR,
                             ),
                     ),
