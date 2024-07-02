@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/dimens.dart';
 import 'package:oxir_game/core/common/fonts.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 
 class PhoneTextFildAuth extends StatelessWidget {
   const PhoneTextFildAuth({
@@ -45,8 +44,6 @@ class PhoneTextFildAuth extends StatelessWidget {
         validator: (value) {
           if (value == null || value.isEmpty) {
             return 'Enter the mobile number';
-          } else if (!value.isValidIranianMobileNumber()) {
-            return 'The mobile number is not correct!';
           }
           return null;
         },

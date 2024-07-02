@@ -52,7 +52,7 @@ class NewPasswordScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       snackBarError(
                         context: context,
-                        title: 'متاسفیم!',
+                        title: 'we are sorry!',
                         desc: state.errorText,
                       ),
                     );
@@ -80,8 +80,9 @@ class NewPasswordScreen extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             snackBarError(
                               context: context,
-                              title: 'متاسفیم!',
-                              desc: 'در تکرار رمز عبور جدید اشتباه کرده اید!',
+                              title: 'we are sorry!',
+                              desc:
+                                  'You made a mistake in repeating the new password!',
                             ),
                           );
                         }

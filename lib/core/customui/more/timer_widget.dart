@@ -4,7 +4,6 @@ import 'package:oxir_game/core/common/dimens.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
 import 'package:oxir_game/features/Timer/bloc/timer_bloc.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 
 class TimerWidget extends StatefulWidget {
   final Function() onTap;
@@ -28,8 +27,7 @@ class _TimerWidgetState extends State<TimerWidget> {
       builder: (context, state) {
         return state.seconds > 0
             ? SmallBoldText(
-                "${state.timerPresenter}  ثانیه تا ارسال مجدد کد"
-                    .toPersianDigit(),
+                "${state.timerPresenter}  Seconds to resend code",
                 textColorInLight: const Color(0xff02629F),
               )
             : GestureDetector(
@@ -39,7 +37,7 @@ class _TimerWidgetState extends State<TimerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     const SmallBoldText(
-                      "ارسال مجدد کد",
+                      "Resend the code",
                       textColorInLight: Color(0xff02629F),
                     ),
                     const HorizontalSpace(horizantal_spacing_1x),

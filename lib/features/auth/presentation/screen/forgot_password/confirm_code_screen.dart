@@ -17,7 +17,6 @@ import 'package:oxir_game/features/auth/presentation/screen/forgot_password/new_
 import 'package:oxir_game/features/auth/presentation/widget/appbar_auth.dart';
 import 'package:oxir_game/features/auth/presentation/widget/phone_textfild_auth.dart';
 import 'package:oxir_game/gen/assets.gen.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:pinput/pinput.dart';
 
 class ConfirmCodeScreen extends StatefulWidget {
@@ -42,13 +41,12 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
             Assets.images.verificationCode.svg(),
             const VerticalSpace(vertical_spacing_10x),
             const VeryHugeBoldText(
-              'ارسال کد تایید',
+              'Send verification code',
               textColorInLight: Color(0xff02629F),
             ),
             const VerticalSpace(vertical_spacing_3x),
             SmallBoldText(
-              'کد تایید ارسال شده برای شماره ${PhoneTextFildAuth.phoneController.text} را درج کنید'
-                  .toPersianDigit(),
+              'The confirmation code was sent to number  ${PhoneTextFildAuth.phoneController.text}',
               textColorInLight: const Color(0xff302E43),
             ),
             const VerticalSpace(vertical_spacing_4x),
@@ -112,7 +110,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     snackBarError(
                       context: context,
-                      title: 'متاسفیم!',
+                      title: 'we are sorry!',
                       desc: state.errorText,
                     ),
                   );
@@ -120,7 +118,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     snackBarError(
                       context: context,
-                      title: 'متاسفیم!',
+                      title: 'we are sorry!',
                       desc: state.errorText,
                     ),
                   );
@@ -148,8 +146,8 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         snackBarError(
                           context: context,
-                          title: 'متاسفیم!',
-                          desc: 'کد وارد شده صحیح نیست!',
+                          title: 'we are sorry!',
+                          desc: 'The entered code is not correct!',
                         ),
                       );
                     }
@@ -163,7 +161,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                     child: state is Login2FactorLoadingState
                         ? const CupertinoActivityIndicator(color: WHITE_COLOR)
                         : const LargeBoldText(
-                            'ارسال کد',
+                            'Send code',
                             textColorInLight: TEXT_LIGHT_COLOR,
                           ),
                   ),

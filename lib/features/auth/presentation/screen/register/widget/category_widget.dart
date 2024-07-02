@@ -89,7 +89,7 @@ class _CategoryListState extends State<CategoryList> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const LargeBoldText(
-                'دسته بندی ها',
+                'Categories',
                 textColorInLight: Color(0xff494949),
               ),
               GestureDetector(
@@ -134,7 +134,7 @@ class _CategoryListState extends State<CategoryList> {
                         },
                         child: Container(
                           height: 40,
-                          alignment: Alignment.centerRight,
+                          alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
                             color: const Color(0xffEAF7FF),
                             borderRadius: BorderRadius.circular(RADIUS_3x),

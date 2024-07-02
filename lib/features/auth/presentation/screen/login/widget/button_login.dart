@@ -23,7 +23,7 @@ class ButtonLogin extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             snackBarError(
               context: context,
-              title: 'متاسفیم!',
+              title: 'we are sorry!',
               desc: state.errorText,
             ),
           );

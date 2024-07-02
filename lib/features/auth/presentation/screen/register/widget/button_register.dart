@@ -44,7 +44,7 @@ class ButtonRegister extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               snackBarError(
                 context: context,
-                title: 'متاسفیم!',
+                title: 'we are sorry!',
                 desc: 'Selection of category and role is mandatory',
               ),
             );
@@ -57,7 +57,7 @@ class ButtonRegister extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               snackBarError(
                 context: context,
-                title: 'متاسفیم!',
+                title: 'we are sorry!',
                 desc: state.errorText,
               ),
             );
@@ -78,7 +78,7 @@ class ButtonRegister extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               snackBarError(
                 context: context,
-                title: 'متاسفیم!',
+                title: 'we are sorry!',
                 desc: state.errorText,
               ),
             );

@@ -38,7 +38,7 @@ class ForgotPassScreen extends StatelessWidget {
               ),
               const VerticalSpace(vertical_spacing_3x),
               const SmallBoldText(
-                'شماره تماس خود را وراد کنید',
+                'Enter your contact number',
                 textColorInLight: Color(0xff302E43),
               ),
               const VerticalSpace(vertical_spacing_4x),
@@ -66,7 +66,7 @@ class ForgotPassScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       snackBarError(
                         context: context,
-                        title: 'متاسفیم!',
+                        title: 'we are sorry!',
                         desc: state.errorText,
                       ),
                     );

@@ -43,7 +43,7 @@ class RoleWidget extends StatelessWidget {
               color: const Color(0xffEAF7FF),
               borderRadius: BorderRadius.circular(RADIUS_3x),
             ),
-            alignment: Alignment.centerRight,
+            alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: padding_Internal1x),
             child: ValueListenableBuilder(
               valueListenable: RoleList.roleNameNotifire,
@@ -81,7 +81,7 @@ class RoleList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const LargeBoldText(
-                'نقش ها',
+                'Roles',
                 textColorInLight: Color(0xff494949),
               ),
               GestureDetector(
@@ -121,7 +121,7 @@ class RoleList extends StatelessWidget {
                               },
                               child: Container(
                                 height: 40,
-                                alignment: Alignment.centerRight,
+                                alignment: Alignment.centerLeft,
                                 decoration: BoxDecoration(
                                   color: const Color(0xffEAF7FF),
                                   borderRadius:
