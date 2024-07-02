@@ -155,7 +155,7 @@ class RoleList extends StatelessWidget {
                           Assets.images.search.svg(height: 100, width: 100),
                           const VerticalSpace(vertical_spacing_4x),
                           const SmallText(
-                            'نقشی برای این دسته بندی تعریف نشده است',
+                            'There is no role defined for this category',
                           ),
                           const VerticalSpace(vertical_spacing_4x),
                         ],

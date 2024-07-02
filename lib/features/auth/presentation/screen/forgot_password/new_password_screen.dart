@@ -141,7 +141,7 @@ class _StrengthPassTextFildState extends State<StrengthPassTextFild> {
               isDense: true,
               filled: true,
               fillColor: const Color(0xffEAF7FF),
-              hintText: "مجدد رمز عبور جدید را وارد کنید",
+              hintText: "Re-enter the new password",
               hintStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,

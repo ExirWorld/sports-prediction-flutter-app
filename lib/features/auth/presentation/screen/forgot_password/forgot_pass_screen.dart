@@ -89,7 +89,7 @@ class ForgotPassScreen extends StatelessWidget {
                       child: state is RequestSmsLoadingState
                           ? const CupertinoActivityIndicator(color: WHITE_COLOR)
                           : const LargeBoldText(
-                              'ادامه',
+                              'Continuation',
                               textColorInLight: TEXT_LIGHT_COLOR,
                             ),
                     ),
