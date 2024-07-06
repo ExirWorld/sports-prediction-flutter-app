@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/dimens.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
 import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
@@ -18,7 +17,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: Colors.black,
       appBar: appBarAuth(context, false),
       body: SingleChildScrollView(
         child: HorizontalMarginContainer(

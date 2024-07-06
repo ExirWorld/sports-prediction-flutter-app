@@ -5,6 +5,7 @@ import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
 import 'package:oxir_game/core/extension/context_extension.dart';
 import 'package:oxir_game/features/auth/presentation/screen/register/register_screen.dart';
+import 'package:oxir_game/gen/assets.gen.dart';
 
 class FooterAuth extends StatelessWidget {
   final String title;
@@ -31,7 +32,10 @@ class FooterAuth extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              NormalBoldText(title),
+              NormalBoldText(
+                title,
+                textColorInLight: const Color(0xff737373),
+              ),
               const HorizontalSpace(horizantal_spacing_1x),
               GestureDetector(
                 onTap: () {
@@ -53,6 +57,7 @@ class FooterAuth extends StatelessWidget {
             ],
           ),
           const VerticalSpace(vertical_spacing_10x),
+          Assets.logos.appLogo4.image(height: 75, width: 75),
         ],
       ),
     );

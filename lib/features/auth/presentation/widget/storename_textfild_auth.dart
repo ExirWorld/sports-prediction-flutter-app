@@ -20,19 +20,19 @@ class StoreNameTextFild extends StatelessWidget {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: Color(0xff302E43),
+          color: Colors.white,
           fontFamily: defaultRegularFontName,
         ),
         decoration: const InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: padding_Foreign1x),
           border: InputBorder.none,
           filled: true,
-          fillColor: Color(0xffEAF7FF),
+          fillColor: Color(0xff272a2f),
           hintText: "Enter the name of the store",
           hintStyle: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: Color(0xff69A6CD),
+            color: Color(0xff888b90),
             fontFamily: defaultRegularFontName,
           ),
         ),

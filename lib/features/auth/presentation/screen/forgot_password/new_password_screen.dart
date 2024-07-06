@@ -21,90 +21,94 @@ class NewPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: Colors.black,
       appBar: appBarAuth(context, false),
       body: HorizontalMarginContainer(
         margin: padding_Horizantalx,
         child: Form(
           key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Assets.images.changePassword.svg(),
-              const VerticalSpace(vertical_spacing_10x),
-              const VeryHugeBoldText(
-                'Change Password',
-                textColorInLight: Color(0xff02629F),
-              ),
-              const VerticalSpace(vertical_spacing_3x),
-              const SmallBoldText(
-                'Enter the new password',
-                textColorInLight: Color(0xff302E43),
-              ),
-              const VerticalSpace(vertical_spacing_4x),
-              const PassTextFildAuth(),
-              const VerticalSpace(vertical_spacing_4x),
-              const StrengthPassTextFild(),
-              const VerticalSpace(vertical_spacing_10x),
-              BlocConsumer<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  if (state is ChangePasswordErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      snackBarError(
-                        context: context,
-                        title: 'we are sorry!',
-                        desc: state.errorText,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Assets.images.changePassword.svg(),
+                const VerticalSpace(vertical_spacing_10x),
+                const VeryHugeBoldText(
+                  'Change Password',
+                  textColorInLight: Colors.white,
+                ),
+                const VerticalSpace(vertical_spacing_3x),
+                const SmallBoldText(
+                  'Enter the new password',
+                  textColorInLight: Colors.white,
+                ),
+                const VerticalSpace(vertical_spacing_4x),
+                const PassTextFildAuth(),
+                const VerticalSpace(vertical_spacing_4x),
+                const StrengthPassTextFild(),
+                const VerticalSpace(vertical_spacing_10x),
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is ChangePasswordErrorState) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        snackBarError(
+                          context: context,
+                          title: 'we are sorry!',
+                          desc: state.errorText,
+                        ),
+                      );
+                    } else if (state is ChangePasswordCompletedState) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginScreen(),
+                          ));
+                    }
+                  },
+                  builder: (context, state) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          if (PassTextFildAuth.passController.text ==
+                              StrengthPassTextFild.passwordNotifire.value) {
+                            BlocProvider.of<AuthBloc>(context).add(
+                              ChangePasswordEvent(
+                                newPassword: StrengthPassTextFild
+                                    .passwordNotifire.value!,
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              snackBarError(
+                                context: context,
+                                title: 'we are sorry!',
+                                desc:
+                                    'You made a mistake in repeating the new password!',
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      child: Container(
+                        height: BUTTON_HEIGHTx2,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: const Color(0xff0867A3),
+                            borderRadius:
+                                BorderRadius.circular(RADIUS_BUTTON3x)),
+                        child: state is ChangePasswordLoadingState
+                            ? const CupertinoActivityIndicator(
+                                color: WHITE_COLOR)
+                            : const LargeBoldText(
+                                'Change Password',
+                                textColorInLight: TEXT_LIGHT_COLOR,
+                              ),
                       ),
                     );
-                  } else if (state is ChangePasswordCompletedState) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
-                        ));
-                  }
-                },
-                builder: (context, state) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        if (PassTextFildAuth.passController.text ==
-                            StrengthPassTextFild.passwordNotifire.value) {
-                          BlocProvider.of<AuthBloc>(context).add(
-                            ChangePasswordEvent(
-                              newPassword:
-                                  StrengthPassTextFild.passwordNotifire.value!,
-                            ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            snackBarError(
-                              context: context,
-                              title: 'we are sorry!',
-                              desc:
-                                  'You made a mistake in repeating the new password!',
-                            ),
-                          );
-                        }
-                      }
-                    },
-                    child: Container(
-                      height: BUTTON_HEIGHTx2,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: const Color(0xff0867A3),
-                          borderRadius: BorderRadius.circular(RADIUS_BUTTON3x)),
-                      child: state is ChangePasswordLoadingState
-                          ? const CupertinoActivityIndicator(color: WHITE_COLOR)
-                          : const LargeBoldText(
-                              'Change Password',
-                              textColorInLight: TEXT_LIGHT_COLOR,
-                            ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -140,12 +144,12 @@ class _StrengthPassTextFildState extends State<StrengthPassTextFild> {
               border: InputBorder.none,
               isDense: true,
               filled: true,
-              fillColor: const Color(0xffEAF7FF),
+              fillColor: const Color(0xff272a2f),
               hintText: "Re-enter the new password",
               hintStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
-                color: Color(0xff69A6CD),
+                color: Color(0xff888b90),
                 fontFamily: defaultRegularFontName,
               ),
               suffixIcon: GestureDetector(
@@ -167,7 +171,7 @@ class _StrengthPassTextFildState extends State<StrengthPassTextFild> {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Color(0xff302E43),
+              color: Colors.white,
               fontFamily: defaultRegularFontName,
             ),
             onChanged: (value) {
@@ -202,9 +206,9 @@ class _StrengthPassTextFildState extends State<StrengthPassTextFild> {
                       radius: 2, // Change the radius of the strength bar
                       colors: const StrengthColors(
                         // Customize the colors of the strength bar
-                        weak: Color(0xff38BF8E),
-                        medium: Color(0xff38BF8E),
-                        strong: Color(0xff38BF8E),
+                        weak: Color(0xff5c60ff),
+                        medium: Color(0xff5c60ff),
+                        strong: Color(0xff5c60ff),
                       ),
                       duration: const Duration(
                           milliseconds: 300), // Set the animation duration
@@ -239,11 +243,11 @@ class _StrengthPassTextFildState extends State<StrengthPassTextFild> {
                       value == 0.0
                           ? ''
                           : value >= 0.1 && value < 1
-                              ? 'ضعیف'
+                              ? 'weak'
                               : value >= 1.0 && value < 1.9
-                                  ? 'متوسط'
-                                  : 'قوی',
-                      textColorInLight: const Color(0xff02629F),
+                                  ? 'medium'
+                                  : 'Strong',
+                      textColorInLight: Colors.white,
                     );
                   },
                 );

@@ -21,7 +21,7 @@ class ForgotPassScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: WHITE_COLOR,
+      backgroundColor: Colors.black,
       appBar: appBarAuth(context, false),
       body: HorizontalMarginContainer(
         margin: padding_Horizantalx,
@@ -34,12 +34,12 @@ class ForgotPassScreen extends StatelessWidget {
               const VerticalSpace(vertical_spacing_10x),
               const VeryHugeBoldText(
                 'Forget Password',
-                textColorInLight: Color(0xff02629F),
+                textColorInLight: TEXT_LIGHT_COLOR,
               ),
               const VerticalSpace(vertical_spacing_3x),
               const SmallBoldText(
                 'Enter your contact number',
-                textColorInLight: Color(0xff302E43),
+                textColorInLight: Colors.white,
               ),
               const VerticalSpace(vertical_spacing_4x),
               const PhoneTextFildAuth(),
@@ -84,7 +84,7 @@ class ForgotPassScreen extends StatelessWidget {
                       height: BUTTON_HEIGHTx2,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: const Color(0xff0867A3),
+                          color: const Color(0xff5c60ff),
                           borderRadius: BorderRadius.circular(RADIUS_BUTTON3x)),
                       child: state is RequestSmsLoadingState
                           ? const CupertinoActivityIndicator(color: WHITE_COLOR)

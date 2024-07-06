@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
-import 'package:oxir_game/features/card/card_screen.dart';
-import 'package:oxir_game/features/dashbord/dashbord_screen.dart';
+import 'package:oxir_game/features/league/league_screen.dart';
+import 'package:oxir_game/features/home/home_screen.dart';
 
 const int homeIndex = 0;
 const int cartIndex = 1;
@@ -57,27 +58,42 @@ class _RootScreenState extends State<RootScreen> {
           body: IndexedStack(
             index: selectedScreenIndex,
             children: [
-              _navigator(_homeKey, homeIndex, const DashBordScreen()),
-              _navigator(_cartKey, cartIndex, const CardScreen()),
+              _navigator(_homeKey, homeIndex, const HomeScreen()),
+              _navigator(_cartKey, cartIndex, const LeagueScreen()),
               _navigator(
                   _profileKey,
                   profileIndex,
-                  const Center(
-                    child: SmallText('Profile'),
+                  const Scaffold(
+                    backgroundColor: Colors.black,
+                    body: Center(
+                      child: SmallText(
+                        'Profile',
+                        textColorInLight: TEXT_LIGHT_COLOR,
+                      ),
+                    ),
                   )),
               _navigator(
                   _zKey,
                   zIndex,
-                  const Center(
-                    child: SmallText('Profile 2'),
+                  const Scaffold(
+                    backgroundColor: Colors.black,
+                    body: Center(
+                      child: SmallText(
+                        'Profile 2',
+                        textColorInLight: TEXT_LIGHT_COLOR,
+                      ),
+                    ),
                   )),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,
-            showUnselectedLabels: true,
+            showUnselectedLabels: false,
             elevation: 3,
+            backgroundColor: const Color(0xff272a2f),
+            selectedItemColor: Colors.white,
+            unselectedItemColor: const Color(0xff4d4e50),
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(CupertinoIcons.home), label: 'Home'),

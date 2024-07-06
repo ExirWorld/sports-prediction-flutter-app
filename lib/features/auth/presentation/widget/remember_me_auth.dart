@@ -33,7 +33,7 @@ class _RememberMeAuthState extends State<RememberMeAuth> {
                 checkBox
                     ? Icons.check_box_outlined
                     : Icons.check_box_outline_blank_outlined,
-                color: DENIM_BLUE_COLOR,
+                color: Colors.white,
               ),
               const HorizontalSpace(horizantal_spacing_2x),
               const NormalText(
@@ -54,7 +54,7 @@ class _RememberMeAuthState extends State<RememberMeAuth> {
           },
           child: Row(
             children: [
-              Assets.icons.userLogin.svg(),
+              Assets.icons.userLogin.svg(color: Colors.white),
               const HorizontalSpace(horizantal_spacing_2x),
               const SmallText(
                 "Forget Password",

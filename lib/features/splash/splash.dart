@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/shared_preferences/shared_preferences_key.dart';
 import 'package:oxir_game/core/shared_preferences/shared_preferences_service.dart';
 import 'package:oxir_game/features/auth/presentation/screen/login/login_screen.dart';
-import 'package:oxir_game/features/root/presentation/root_screen.dart';
+import 'package:oxir_game/features/nav_bar/main_screen.dart';
 import 'package:oxir_game/features/splash/bloc/splash_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -46,15 +47,18 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const RootScreen(),
+              builder: (context) => const MainScreen(),
             ),
           );
         }
       },
       builder: (context, state) {
         return const Scaffold(
+          backgroundColor: Colors.black,
           body: Center(
-            child: CupertinoActivityIndicator(),
+            child: CupertinoActivityIndicator(
+              color: WHITE_COLOR,
+            ),
           ),
         );
       },

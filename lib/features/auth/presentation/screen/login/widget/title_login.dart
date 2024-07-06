@@ -21,7 +21,10 @@ class TitleLogin extends StatelessWidget {
         VerticalSpace(vertical_spacing_3x),
 
         // به اکسیر خوش آمدید
-        NormalBoldText('Welcome to Oxir!'),
+        NormalBoldText(
+          'Welcome to Exir!',
+          textColorInLight: Colors.white,
+        ),
       ],
     );
   }

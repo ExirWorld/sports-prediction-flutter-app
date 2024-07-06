@@ -9,7 +9,7 @@ import 'package:oxir_game/core/customui/notifications/snackbar_error.dart';
 import 'package:oxir_game/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:oxir_game/features/auth/presentation/widget/pass_textfild_auth.dart';
 import 'package:oxir_game/features/auth/presentation/widget/phone_textfild_auth.dart';
-import 'package:oxir_game/features/root/presentation/root_screen.dart';
+import 'package:oxir_game/features/nav_bar/main_screen.dart';
 
 class ButtonLogin extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -33,7 +33,7 @@ class ButtonLogin extends StatelessWidget {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const RootScreen(),
+                builder: (context) => const MainScreen(),
               ));
         }
       },
@@ -52,7 +52,7 @@ class ButtonLogin extends StatelessWidget {
           child: Container(
             height: 50,
             decoration: BoxDecoration(
-              color: const Color(0xff0867A3),
+              color: const Color(0xff5c60ff),
               borderRadius: BorderRadius.circular(RADIUS_BUTTON3x),
             ),
             alignment: Alignment.center,

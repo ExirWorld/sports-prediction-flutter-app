@@ -27,7 +27,7 @@ class ReferalRegisterBox extends StatelessWidget {
                 value
                     ? Icons.check_box_outlined
                     : Icons.check_box_outline_blank_outlined,
-                color: DENIM_BLUE_COLOR,
+                color: Colors.white,
               ),
               const HorizontalSpace(horizantal_spacing_1x),
               const NormalText(

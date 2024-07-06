@@ -15,7 +15,7 @@ import 'package:oxir_game/features/auth/presentation/widget/name_textfild_auth.d
 import 'package:oxir_game/features/auth/presentation/widget/pass_textfild_auth.dart';
 import 'package:oxir_game/features/auth/presentation/widget/phone_textfild_auth.dart';
 import 'package:oxir_game/features/auth/presentation/widget/storename_textfild_auth.dart';
-import 'package:oxir_game/features/root/presentation/root_screen.dart';
+import 'package:oxir_game/features/nav_bar/main_screen.dart';
 
 class ButtonRegister extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -28,27 +28,16 @@ class ButtonRegister extends StatelessWidget {
       scaleFactor: 1.5,
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          if (CategoryList.categoryIdNotifire.value != null &&
-              RoleList.roleIdNotifire.value != null) {
-            BlocProvider.of<AuthBloc>(context).add(RegisterEvent(
-              mobileNumber: PhoneTextFildAuth.phoneController.text,
-              password: PassTextFildAuth.passController.text,
-              storeName: StoreNameTextFild.storeController.text,
-              name: NameTextFildAuth.nameController.text,
-              fName: FNameTextFildAuth.fNameController.text,
-              referalCode: ReferalTextFild.referalController.text,
-              rullId: RoleList.roleIdNotifire.value!,
-              categoriesId: CategoryList.categoryIdNotifire.value!,
-            ));
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              snackBarError(
-                context: context,
-                title: 'we are sorry!',
-                desc: 'Selection of category and role is mandatory',
-              ),
-            );
-          }
+          BlocProvider.of<AuthBloc>(context).add(RegisterEvent(
+            mobileNumber: PhoneTextFildAuth.phoneController.text,
+            password: PassTextFildAuth.passController.text,
+            storeName: StoreNameTextFild.storeController.text,
+            name: NameTextFildAuth.nameController.text,
+            fName: FNameTextFildAuth.fNameController.text,
+            referalCode: ReferalTextFild.referalController.text,
+            rullId: '-1',
+            categoriesId: '-1',
+          ));
         }
       },
       child: BlocConsumer<AuthBloc, AuthState>(
@@ -72,7 +61,7 @@ class ButtonRegister extends StatelessWidget {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const RootScreen(),
+                  builder: (context) => const MainScreen(),
                 ));
           } else if (state is LoginUserErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -88,7 +77,7 @@ class ButtonRegister extends StatelessWidget {
           return Container(
             height: 50,
             decoration: BoxDecoration(
-              color: const Color(0xff0867A3),
+              color: const Color(0xff5c60ff),
               borderRadius: BorderRadius.circular(RADIUS_BUTTON3x),
             ),
             alignment: Alignment.center,

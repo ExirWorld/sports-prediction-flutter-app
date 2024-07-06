@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/dimens.dart';
 import 'package:oxir_game/core/customui/more/empty_container.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
@@ -23,7 +22,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: WHITE_COLOR,
+        backgroundColor: Colors.black,
         appBar: appBarAuth(context, true, title: 'Create Account'),
         body: SingleChildScrollView(
           child: HorizontalMarginContainer(
@@ -54,8 +53,8 @@ class RegisterScreen extends StatelessWidget {
                   const StoreNameTextFild(),
                   const VerticalSpace(vertical_spacing_4x),
 
-                  // انتخاب دسته بندی
-                  const CategoryWidget(),
+                  // // انتخاب دسته بندی
+                  // const CategoryWidget(),
                   const VerticalSpace(vertical_spacing_4x),
 
                   // انتخاب نقش

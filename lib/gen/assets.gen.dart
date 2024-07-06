@@ -29,11 +29,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/account.svg
   SvgGenImage get account => const SvgGenImage('assets/icons/account.svg');
 
+  /// File path: assets/icons/airdrop.png
+  AssetGenImage get airdrop => const AssetGenImage('assets/icons/airdrop.png');
+
   /// File path: assets/icons/bill.svg
   SvgGenImage get bill => const SvgGenImage('assets/icons/bill.svg');
 
   /// File path: assets/icons/close.svg
   SvgGenImage get close => const SvgGenImage('assets/icons/close.svg');
+
+  /// File path: assets/icons/coin.png
+  AssetGenImage get coin => const AssetGenImage('assets/icons/coin.png');
 
   /// File path: assets/icons/commodity.svg
   SvgGenImage get commodity => const SvgGenImage('assets/icons/commodity.svg');
@@ -41,18 +47,38 @@ class $AssetsIconsGen {
   /// File path: assets/icons/diamond.svg
   SvgGenImage get diamond => const SvgGenImage('assets/icons/diamond.svg');
 
+  /// File path: assets/icons/earn.png
+  AssetGenImage get earn => const AssetGenImage('assets/icons/earn.png');
+
   /// File path: assets/icons/error.svg
   SvgGenImage get error => const SvgGenImage('assets/icons/error.svg');
+
+  /// File path: assets/icons/exirplus.png
+  AssetGenImage get exirplus =>
+      const AssetGenImage('assets/icons/exirplus.png');
 
   /// File path: assets/icons/finger-print.svg
   SvgGenImage get fingerPrint =>
       const SvgGenImage('assets/icons/finger-print.svg');
 
+  /// File path: assets/icons/friends.png
+  AssetGenImage get friends => const AssetGenImage('assets/icons/friends.png');
+
   /// File path: assets/icons/gym.svg
   SvgGenImage get gym => const SvgGenImage('assets/icons/gym.svg');
 
+  /// File path: assets/icons/info.png
+  AssetGenImage get info => const AssetGenImage('assets/icons/info.png');
+
   /// File path: assets/icons/inventory.svg
   SvgGenImage get inventory => const SvgGenImage('assets/icons/inventory.svg');
+
+  /// File path: assets/icons/lightning.png
+  AssetGenImage get lightning =>
+      const AssetGenImage('assets/icons/lightning.png');
+
+  /// File path: assets/icons/main.png
+  AssetGenImage get main => const AssetGenImage('assets/icons/main.png');
 
   /// File path: assets/icons/menu.svg
   SvgGenImage get menu => const SvgGenImage('assets/icons/menu.svg');
@@ -67,8 +93,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/reports.svg
   SvgGenImage get reports => const SvgGenImage('assets/icons/reports.svg');
 
+  /// File path: assets/icons/rocket.png
+  AssetGenImage get rocket => const AssetGenImage('assets/icons/rocket.png');
+
   /// File path: assets/icons/sales-box.svg
   SvgGenImage get salesBox => const SvgGenImage('assets/icons/sales-box.svg');
+
+  /// File path: assets/icons/setting.png
+  AssetGenImage get setting => const AssetGenImage('assets/icons/setting.png');
 
   /// File path: assets/icons/store.svg
   SvgGenImage get store => const SvgGenImage('assets/icons/store.svg');
@@ -96,21 +128,31 @@ class $AssetsIconsGen {
   SvgGenImage get visitor => const SvgGenImage('assets/icons/visitor.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
         account,
+        airdrop,
         bill,
         close,
+        coin,
         commodity,
         diamond,
+        earn,
         error,
+        exirplus,
         fingerPrint,
+        friends,
         gym,
+        info,
         inventory,
+        lightning,
+        main,
         menu,
         message,
         notification,
         reports,
+        rocket,
         salesBox,
+        setting,
         store,
         successful,
         support,
@@ -142,6 +184,9 @@ class $AssetsImagesGen {
   SvgGenImage get forgetfulness =>
       const SvgGenImage('assets/images/forgetfulness.svg');
 
+  /// File path: assets/images/hamster.png
+  AssetGenImage get hamster => const AssetGenImage('assets/images/hamster.png');
+
   /// File path: assets/images/kif.png
   AssetGenImage get kif => const AssetGenImage('assets/images/kif.png');
 
@@ -162,11 +207,23 @@ class $AssetsImagesGen {
         changePassword,
         element,
         forgetfulness,
+        hamster,
         kif,
         play,
         search,
         verificationCode
       ];
+}
+
+class $AssetsLogosGen {
+  const $AssetsLogosGen();
+
+  /// File path: assets/logos/AppLogo4.png
+  AssetGenImage get appLogo4 =>
+      const AssetGenImage('assets/logos/AppLogo4.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [appLogo4];
 }
 
 class $AssetsTranslationsGen {
@@ -188,6 +245,7 @@ class Assets {
   static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsLogosGen logos = $AssetsLogosGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 

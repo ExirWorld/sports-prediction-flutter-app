@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/constants.dart';
 import 'package:oxir_game/core/common/dimens.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
@@ -28,7 +27,7 @@ class CategoryWidget extends StatelessWidget {
               topRight: Radius.circular(10),
             ),
           ),
-          backgroundColor: WHITE_COLOR,
+          backgroundColor: const Color(0xff1b1e23),
           elevation: 0,
           context: context,
           builder: (context) {
@@ -39,7 +38,7 @@ class CategoryWidget extends StatelessWidget {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          color: const Color(0xffEAF7FF),
+          color: const Color(0xff272a2f),
           borderRadius: BorderRadius.circular(RADIUS_3x),
         ),
         alignment: Alignment.centerLeft,
@@ -49,9 +48,8 @@ class CategoryWidget extends StatelessWidget {
           builder: (context, value, child) {
             return NormalText(
               value ?? 'Select Category',
-              textColorInLight: value != null
-                  ? const Color(0xff302E43)
-                  : const Color(0xff69A6CD),
+              textColorInLight:
+                  value != null ? Colors.white : const Color(0xff888b90),
             );
           },
         ),
@@ -90,13 +88,13 @@ class _CategoryListState extends State<CategoryList> {
             children: [
               const LargeBoldText(
                 'Categories',
-                textColorInLight: Color(0xff494949),
+                textColorInLight: Colors.white,
               ),
               GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Assets.icons.close.svg(),
+                child: Assets.icons.close.svg(color: Colors.white),
               ),
             ],
           ),
@@ -136,7 +134,7 @@ class _CategoryListState extends State<CategoryList> {
                           height: 40,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            color: const Color(0xffEAF7FF),
+                            color: const Color(0xff272a31),
                             borderRadius: BorderRadius.circular(RADIUS_3x),
                           ),
                           padding: const EdgeInsetsDirectional.symmetric(
@@ -151,7 +149,7 @@ class _CategoryListState extends State<CategoryList> {
                               const HorizontalSpace(horizantal_spacing_2x),
                               NormalBoldText(
                                 data.categoryName!,
-                                textColorInLight: const Color(0xff02629F),
+                                textColorInLight: Colors.white,
                               ),
                             ],
                           ),

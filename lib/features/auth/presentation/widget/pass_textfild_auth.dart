@@ -28,7 +28,7 @@ class _PassTextFildAuthState extends State<PassTextFildAuth> {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
-          color: Color(0xff302E43),
+          color: Colors.white,
           fontFamily: defaultRegularFontName,
         ),
         decoration: InputDecoration(
@@ -39,12 +39,12 @@ class _PassTextFildAuthState extends State<PassTextFildAuth> {
           border: InputBorder.none,
           isDense: true,
           filled: true,
-          fillColor: const Color(0xffEAF7FF),
+          fillColor: const Color(0xff272a2f),
           hintText: "Enter your password",
           hintStyle: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,
-            color: Color(0xff69A6CD),
+            color: Color(0xff888b90),
             fontFamily: defaultRegularFontName,
           ),
           suffixIcon: GestureDetector(
