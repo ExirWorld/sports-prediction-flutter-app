@@ -199,6 +199,19 @@ Widget _contentInfo(
         const SizedBox(
           height: 20,
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Container(
+            height: 275,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(24),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
         // _titleContentInfo(),
 
         const SizedBox(
