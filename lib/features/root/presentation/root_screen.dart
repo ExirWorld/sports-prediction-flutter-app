@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
-import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
+import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 import 'package:oxir_game/features/home/home_screen.dart';
 
 const int homeIndex = 0;
@@ -59,7 +59,7 @@ class _RootScreenState extends State<RootScreen> {
             index: selectedScreenIndex,
             children: [
               _navigator(_homeKey, homeIndex, const HomeScreen()),
-              _navigator(_cartKey, cartIndex, const LeagueScreen()),
+              _navigator(_cartKey, cartIndex, const SportsScreen()),
               _navigator(
                   _profileKey,
                   profileIndex,

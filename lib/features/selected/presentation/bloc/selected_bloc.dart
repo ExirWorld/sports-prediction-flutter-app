@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:oxir_game/core/resources/data_state.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/match_entity.dart';
@@ -12,6 +13,7 @@ import 'package:oxir_game/features/selected/domain/use_case/selected_usecase.dar
 part 'selected_event.dart';
 part 'selected_state.dart';
 
+@injectable
 class SelectedBloc extends Bloc<SelectedEvent, SelectedState> {
   final SelectedUsecase selectedUsecase;
   SelectedBloc(this.selectedUsecase) : super(SelectedInitial()) {

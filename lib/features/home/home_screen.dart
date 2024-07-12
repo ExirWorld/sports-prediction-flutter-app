@@ -16,79 +16,84 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: _appbar(),
-      body: ListView(
-        children: [
-          _titleInfo(),
-          Padding(
-            padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
-            child: Container(
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.white12,
-                borderRadius: BorderRadius.circular(32),
-                border: Border.all(
-                  color: const Color(0xffe9c475),
-                  width: .05,
+      body: SingleChildScrollView(
+        child: ListView(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            _titleInfo(),
+            Padding(
+              padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
+              child: Container(
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white12,
+                  borderRadius: BorderRadius.circular(32),
+                  border: Border.all(
+                    color: const Color(0xffe9c475),
+                    width: .05,
+                  ),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Assets.icons.exirplus.image(height: 40),
+                    Container(
+                      width: .5,
+                      color: Colors.white24,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Profit per tap',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Color(0xffaf7c64),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Assets.icons.coin.image(width: 25, height: 25),
+                            const SizedBox(width: 3),
+                            const Text(
+                              '+2.14M',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(width: 3),
+                            Assets.icons.info.image(height: 25, width: 25),
+                          ],
+                        )
+                      ],
+                    ),
+                    Container(
+                      width: .5,
+                      color: Colors.white24,
+                    ),
+                    Assets.icons.setting.image(height: 40, color: Colors.white),
+                  ],
                 ),
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Assets.icons.exirplus.image(height: 40),
-                  Container(
-                    width: .5,
-                    color: Colors.white24,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Profit per tap',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Color(0xffaf7c64),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Assets.icons.coin.image(width: 25, height: 25),
-                          const SizedBox(width: 3),
-                          const Text(
-                            '+2.14M',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(width: 3),
-                          Assets.icons.info.image(height: 25, width: 25),
-                        ],
-                      )
-                    ],
-                  ),
-                  Container(
-                    width: .5,
-                    color: Colors.white24,
-                  ),
-                  Assets.icons.setting.image(height: 40, color: Colors.white),
-                ],
-              ),
             ),
-          ),
-          _contentInfo(
-            context,
-            _coins,
-            _energy,
-            () {
-              setState(() {
-                _coins = _coins + 10;
-                _energy = _energy - 10;
-              });
-            },
-          )
-        ],
+            _contentInfo(
+              context,
+              _coins,
+              _energy,
+              () {
+                setState(() {
+                  _coins = _coins + 10;
+                  _energy = _energy - 10;
+                });
+              },
+            )
+          ],
+        ),
       ),
     );
   }
@@ -173,7 +178,6 @@ Widget _contentInfo(
   VoidCallback onTap,
 ) {
   return Container(
-    height: 800,
     decoration: const BoxDecoration(
       color: Color(0xff1b1f24),
       border: Border(
@@ -257,6 +261,9 @@ Widget _contentInfo(
               ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 120,
         ),
         // _energyContentInfo(energy),
       ],

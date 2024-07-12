@@ -32,7 +32,7 @@ class NavBar extends StatelessWidget {
                 onTap: () => onTap(0),
               ),
               navItem(
-                'League',
+                'sports',
                 'main',
                 pageIndex == 1,
                 onTap: () => onTap(1),

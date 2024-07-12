@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
-import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
-import 'package:oxir_game/features/selected/presentation/screen/match_screen.dart';
+import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
 
-class LeagueScreen extends StatefulWidget {
-  final SportsEntity sportsEntity;
-  const LeagueScreen({super.key, required this.sportsEntity});
+class SportsScreen extends StatefulWidget {
+  const SportsScreen({super.key});
 
   @override
-  State<LeagueScreen> createState() => _LeagueScreenState();
+  State<SportsScreen> createState() => _SportsScreenState();
 }
 
-class _LeagueScreenState extends State<LeagueScreen> {
+class _SportsScreenState extends State<SportsScreen> {
   @override
   void initState() {
-    BlocProvider.of<SelectedBloc>(context)
-        .add(GetLeaguesEvent(sportRef: widget.sportsEntity.sportId.toString()));
+    BlocProvider.of<SelectedBloc>(context).add(GetSportsEvent());
     super.initState();
   }
 
@@ -38,39 +35,44 @@ class _LeagueScreenState extends State<LeagueScreen> {
               ),
               BlocBuilder<SelectedBloc, SelectedState>(
                 buildWhen: (previous, current) {
-                  return current is GetLeaguesCompleted ||
-                          current is GetLeaguesError ||
-                          current is GetLeaguesLoading
+                  return current is GetSportsCompleted ||
+                          current is GetSportsLoading ||
+                          current is GetSportsError
                       ? true
                       : false;
                 },
                 builder: (context, state) {
-                  if (state is GetLeaguesCompleted) {
-                    return ListView.builder(
+                  if (state is GetSportsCompleted) {
+                    return GridView.builder(
+                      itemCount: state.sportsEntity.length,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.leagueEntity.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 2,
+                        mainAxisExtent: 275,
+                      ),
                       itemBuilder: (context, index) {
-                        final data = state.leagueEntity[index];
+                        final data = state.sportsEntity[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MatchScreen(
-                                    sportsEntity: widget.sportsEntity,
-                                    leagueEntity: data,
+                                  builder: (context) => LeagueScreen(
+                                    sportsEntity: data,
                                   ),
                                 ));
                           },
                           child: Container(
-                            height: 275,
+                            margin: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              color: Colors.amber,
                               borderRadius: BorderRadius.circular(24),
                             ),
                             alignment: Alignment.center,
-                            child: Text(data.leagueName!),
+                            child: Text(data.sportName!),
                           ),
                         );
                       },
@@ -79,7 +81,10 @@ class _LeagueScreenState extends State<LeagueScreen> {
                     return const SizedBox();
                   }
                 },
-              )
+              ),
+              const SizedBox(
+                height: 120,
+              ),
             ],
           ),
         ),

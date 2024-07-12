@@ -176,8 +176,7 @@ class AuthRepositoryImpl extends AuthRepository {
       UserInfoEntity userInfoEntity = UserInfoModel.fromJson(response.data);
       return DataSuccess(userInfoEntity);
     } on DioException catch (e) {
-      ErrorEntity errorEntity = ErrorModel.fromJson(e.response!.data);
-      return DataFailed(errorEntity.message!);
+      return DataFailed(e.message!);
     }
   }
 

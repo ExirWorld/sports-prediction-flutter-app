@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
-import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
+import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 import 'package:oxir_game/features/home/home_screen.dart';
 import 'package:oxir_game/features/nav_bar/nav_model.dart';
 import 'package:oxir_game/features/nav_bar/navbar_screen.dart';
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
         navkey: airdropNavKey,
       ),
       NavModel(
-        page: const LeagueScreen(),
+        page: const SportsScreen(),
         navkey: searchNavKey,
       ),
       NavModel(
