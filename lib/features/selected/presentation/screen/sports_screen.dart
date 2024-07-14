@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/constants.dart';
+import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
@@ -51,32 +55,161 @@ class _SportsScreenState extends State<SportsScreen> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisSpacing: 20,
+                        mainAxisSpacing: 50,
                         crossAxisSpacing: 20,
                       ),
                       itemBuilder: (context, index) {
                         final data = state.sportsEntity[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LeagueScreen(
-                                    sportsEntity: data,
+                        return data.status == 1
+                            ? GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LeagueScreen(
+                                          sportsEntity: data,
+                                        ),
+                                      ));
+                                },
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  alignment: Alignment.bottomCenter,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24),
+                                      ),
+                                      child: Image.network(
+                                        '${Constants.baseUrl}${data.sportImageUrl!}',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: -35,
+                                      child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(24)),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 30, sigmaY: 30),
+                                          child: Container(
+                                            height: 75,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.2,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.grey.withOpacity(0.1),
+                                              border: Border.all(
+                                                  color: Colors.white
+                                                      .withOpacity(0.2),
+                                                  width: 1),
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                Radius.circular(25),
+                                              ),
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: SmallText(
+                                              data.sportName!,
+                                              textColorInLight:
+                                                  TEXT_LIGHT_COLOR,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Stack(
+                                clipBehavior: Clip.none,
+                                alignment: Alignment.bottomCenter,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                    ),
+                                    child: Image.network(
+                                      '${Constants.baseUrl}${data.sportImageUrl!}',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ));
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(24),
-                              child: Image.network(
-                                '${Constants.baseUrl}${data.sportImageUrl!}',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
+                                  Positioned(
+                                    bottom: -35,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(24)),
+                                      child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 30, sigmaY: 30),
+                                        child: Container(
+                                          height: 75,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2.2,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.withOpacity(0.1),
+                                            border: Border.all(
+                                                color: Colors.white
+                                                    .withOpacity(0.2),
+                                                width: 1),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(25),
+                                            ),
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: SmallText(
+                                            data.sportName!,
+                                            textColorInLight: TEXT_LIGHT_COLOR,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: -35,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(24)),
+                                      child: BackdropFilter(
+                                        filter: ImageFilter.blur(
+                                            sigmaX: 1, sigmaY: 1),
+                                        child: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              .26,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2.2,
+                                          alignment: Alignment.center,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  Colors.black.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            ),
+                                            padding: const EdgeInsets.all(8),
+                                            child: const HugeBoldText(
+                                              'Expired',
+                                              textColorInLight:
+                                                  TEXT_LIGHT_COLOR,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
                       },
                     );
                   } else {
