@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/features/nav_bar/main_screen.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
@@ -31,7 +32,16 @@ class _MatchScreenState extends State<MatchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
       ),
-      body: BlocBuilder<SelectedBloc, SelectedState>(
+      body: BlocConsumer<SelectedBloc, SelectedState>(
+        listener: (context, state) {
+          if (state is AddPositionCompleted) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MainScreen(),
+                ));
+          }
+        },
         buildWhen: (previous, current) {
           return current is GetMatchCompleted ||
                   current is GetMatchError ||
@@ -62,8 +72,10 @@ class _MatchScreenState extends State<MatchScreen> {
                                     sportsEntity: widget.sportsEntity,
                                     leagueEntity: widget.leagueEntity,
                                     matchEntity: data,
+                                    teamRef: 0,
                                   ),
                                 ));
+                            Navigator.pop(context);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

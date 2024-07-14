@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:oxir_game/core/resources/data_state.dart';
+import 'package:oxir_game/features/selected/domain/entity/add_position_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/match_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/room_match_entity.dart';
@@ -21,6 +22,7 @@ class SelectedBloc extends Bloc<SelectedEvent, SelectedState> {
     on<GetLeaguesEvent>(_getLeaguesEvent);
     on<GetMatchEvent>(_getMatchEvent);
     on<GetRoomMatchEvent>(_getRoomMatchEvent);
+    on<AddPositionEvent>(_addPositionEvent);
   }
 
   FutureOr<void> _getSportsEvent(
@@ -77,6 +79,27 @@ class SelectedBloc extends Bloc<SelectedEvent, SelectedState> {
 
     if (dataState is DataFailed) {
       emit(GetRoomMatchError(dataState.error!));
+    }
+  }
+
+  FutureOr<void> _addPositionEvent(
+      AddPositionEvent event, Emitter<SelectedState> emit) async {
+    emit(AddPositionLoading());
+    DataState dataState = await selectedUsecase.addPosition(
+      sportRef: event.sportRef,
+      leagueRef: event.leagueRef,
+      matchRef: event.matchRef,
+      teamRef: event.teamRef,
+      roomRef: event.roomRef,
+      roomMatchRef: event.roomMatchRef,
+    );
+
+    if (dataState is DataSuccess) {
+      emit(AddPositionCompleted(dataState.data));
+    }
+
+    if (dataState is DataFailed) {
+      emit(AddPositionError(dataState.error!));
     }
   }
 }

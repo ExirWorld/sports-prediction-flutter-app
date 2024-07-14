@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/core/common/constants.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
@@ -50,8 +51,8 @@ class _SportsScreenState extends State<SportsScreen> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisSpacing: 2,
-                        mainAxisExtent: 275,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
                       ),
                       itemBuilder: (context, index) {
                         final data = state.sportsEntity[index];
@@ -66,13 +67,14 @@ class _SportsScreenState extends State<SportsScreen> {
                                 ));
                           },
                           child: Container(
-                            margin: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(24),
-                            ),
                             alignment: Alignment.center,
-                            child: Text(data.sportName!),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
+                              child: Image.network(
+                                '${Constants.baseUrl}${data.sportImageUrl!}',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         );
                       },

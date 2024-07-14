@@ -8,11 +8,11 @@ class RoomMatchEntity extends Equatable {
   final String? roomMatchName;
   final String? roomMatchImageUrl;
   final String? roomMatchColor;
-  final int? allTokenValue;
-  final int? tokenDepositValue;
+  final num? allTokenValue;
+  final num? tokenDepositValue;
   final int? seatCount;
-  final int? winnerSeatVal;
-  final int? looserSeatVal;
+  final num? winnerSeatVal;
+  final num? looserSeatVal;
   final int? status;
   final String? desc;
   final String? createDate;

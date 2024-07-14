@@ -33,4 +33,30 @@ class ApiSelected {
         await httpclient.post('Play/RoomMatch', data: {"matchRef": matchRef});
     return resposne;
   }
+
+  // ارسال نهایی اطلاعات
+  Future<dynamic> addPosition(
+    String sportRef,
+    String leagueRef,
+    String matchRef,
+    String teamRef,
+    String roomRef,
+    String roomMatchRef,
+  ) async {
+    final resposne = await httpclient.post('Play/AddPosition', data: {
+      "sportRef": "string",
+      "leagueRef": "string",
+      "matchRef": "string",
+      "teamRef": "string",
+      "roomRef": "string",
+      "roomMatchRef": "string"
+    });
+    return resposne;
+  }
+
+  // دریافت لیست بازی هایی که کاربر شرکت کرده
+  Future<dynamic> userActivePosition() async {
+    final resposne = await httpclient.post('Play/UserActivePosition');
+    return resposne;
+  }
 }

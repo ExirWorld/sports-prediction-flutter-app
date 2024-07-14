@@ -27,3 +27,20 @@ final class GetRoomMatchEvent extends SelectedEvent {
 
   const GetRoomMatchEvent({required this.matchRef});
 }
+
+final class AddPositionEvent extends SelectedEvent {
+  final String sportRef;
+  final String leagueRef;
+  final String matchRef;
+  final String teamRef;
+  final String roomRef;
+  final String roomMatchRef;
+  const AddPositionEvent({
+    required this.sportRef,
+    required this.leagueRef,
+    required this.matchRef,
+    required this.teamRef,
+    required this.roomRef,
+    required this.roomMatchRef,
+  });
+}

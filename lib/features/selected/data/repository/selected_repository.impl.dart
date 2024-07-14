@@ -5,10 +5,12 @@ import 'package:oxir_game/core/resources/data_state.dart';
 import 'package:oxir_game/core/resources/entity/error_entity.dart';
 import 'package:oxir_game/core/resources/model/error_model.dart';
 import 'package:oxir_game/features/selected/data/data_source/api_selected.dart';
+import 'package:oxir_game/features/selected/data/model/add_position_model.dart';
 import 'package:oxir_game/features/selected/data/model/league_model.dart';
 import 'package:oxir_game/features/selected/data/model/match_model.dart';
 import 'package:oxir_game/features/selected/data/model/room_match_model.dart';
 import 'package:oxir_game/features/selected/data/model/sports_model.dart';
+import 'package:oxir_game/features/selected/domain/entity/add_position_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/match_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/room_match_entity.dart';
@@ -68,6 +70,27 @@ class SelectedRepositoryImpl extends SelectedRepository {
       List<SportsEntity> sportsEntity = List<SportsEntity>.from(
           response.data.map((model) => SportsModel.fromJson(model)));
       return DataSuccess(sportsEntity);
+    } on DioException catch (e) {
+      ErrorEntity errorEntity = ErrorModel.fromJson(e.response!.data);
+      return DataFailed(errorEntity.message!);
+    }
+  }
+
+  @override
+  Future<DataState<AddPositionEntity>> addPosition({
+    required String sportRef,
+    required String leagueRef,
+    required String matchRef,
+    required String teamRef,
+    required String roomRef,
+    required String roomMatchRef,
+  }) async {
+    try {
+      Response response = await apiSelected.addPosition(
+          sportRef, leagueRef, matchRef, teamRef, roomRef, roomMatchRef);
+      AddPositionEntity addPositionEntity =
+          AddPositionModel.fromJson(response.data);
+      return DataSuccess(addPositionEntity);
     } on DioException catch (e) {
       ErrorEntity errorEntity = ErrorModel.fromJson(e.response!.data);
       return DataFailed(errorEntity.message!);

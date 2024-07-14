@@ -1,4 +1,5 @@
 import 'package:oxir_game/core/resources/data_state.dart';
+import 'package:oxir_game/features/selected/domain/entity/add_position_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/match_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/room_match_entity.dart';
@@ -17,4 +18,14 @@ abstract class SelectedRepository {
 
   // دریافت لیست اتاق های بازی
   Future<DataState<List<RoomMatchEntity>>> getRoomMatch(String matchRef);
+
+  // ارسال نهایی اطلاعات
+  Future<DataState<AddPositionEntity>> addPosition({
+    required String sportRef,
+    required String leagueRef,
+    required String matchRef,
+    required String teamRef,
+    required String roomRef,
+    required String roomMatchRef,
+  });
 }

@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:oxir_game/core/resources/data_state.dart';
+import 'package:oxir_game/features/selected/domain/entity/add_position_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/match_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/room_match_entity.dart';
@@ -38,6 +39,27 @@ class SelectedUsecase {
   Future<DataState<List<RoomMatchEntity>>> getRoomMatch(String matchRef) async {
     DataState<List<RoomMatchEntity>> dataState =
         await selectedRepository.getRoomMatch(matchRef);
+    return dataState;
+  }
+
+  // ارسال نهایی اطلاعات
+  Future<DataState<AddPositionEntity>> addPosition({
+    required String sportRef,
+    required String leagueRef,
+    required String matchRef,
+    required String teamRef,
+    required String roomRef,
+    required String roomMatchRef,
+  }) async {
+    DataState<AddPositionEntity> dataState =
+        await selectedRepository.addPosition(
+      sportRef: sportRef,
+      leagueRef: leagueRef,
+      matchRef: matchRef,
+      teamRef: teamRef,
+      roomRef: roomRef,
+      roomMatchRef: roomMatchRef,
+    );
     return dataState;
   }
 }

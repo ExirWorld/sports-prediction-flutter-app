@@ -69,3 +69,18 @@ final class GetRoomMatchError extends SelectedState {
 
   const GetRoomMatchError(this.errorText);
 }
+////////////////////////////////////////////////////////////////////////////////////
+
+final class AddPositionLoading extends SelectedState {}
+
+final class AddPositionCompleted extends SelectedState {
+  final List<AddPositionEntity> addPositionEntity;
+
+  const AddPositionCompleted(this.addPositionEntity);
+}
+
+final class AddPositionError extends SelectedState {
+  final String errorText;
+
+  const AddPositionError(this.errorText);
+}
