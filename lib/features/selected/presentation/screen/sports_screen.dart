@@ -190,20 +190,6 @@ class _SportsScreenState extends State<SportsScreen> {
                                                   .width /
                                               2.2,
                                           alignment: Alignment.center,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.black.withOpacity(0.5),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                            padding: const EdgeInsets.all(8),
-                                            child: const HugeBoldText(
-                                              'Expired',
-                                              textColorInLight:
-                                                  TEXT_LIGHT_COLOR,
-                                            ),
-                                          ),
                                         ),
                                       ),
                                     ),
