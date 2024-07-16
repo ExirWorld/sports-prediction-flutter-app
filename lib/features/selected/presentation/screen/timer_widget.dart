@@ -148,7 +148,6 @@ class _CountdownWidgetState extends State<CountdownWidget> {
         title: '',
         titlePositionPercentageOffset: 1.3,
         titleStyle: const TextStyle(fontSize: 0),
-        borderRadius:
       ),
       PieChartSectionData(
         color: passedColor,
