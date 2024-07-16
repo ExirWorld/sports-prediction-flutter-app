@@ -18,6 +18,7 @@ class MatchEntity extends Equatable {
   final int? teamBStars;
   final String? matchDate;
   final String? matchStartDate;
+  final num? countDown;
   final String? matchEndDate;
   final bool? matchEnded;
   final dynamic palyedDate;
@@ -44,6 +45,7 @@ class MatchEntity extends Equatable {
     this.teamBStars,
     this.matchDate,
     this.matchStartDate,
+    this.countDown,
     this.matchEndDate,
     this.matchEnded,
     this.palyedDate,
@@ -72,6 +74,7 @@ class MatchEntity extends Equatable {
         teamBStars,
         matchDate,
         matchStartDate,
+        countDown,
         matchEndDate,
         matchEnded,
         palyedDate,

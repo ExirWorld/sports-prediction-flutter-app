@@ -2,14 +2,19 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:oxir_game/core/common/colors.dart';
+import 'package:oxir_game/core/common/constants.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
+import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
 import 'package:oxir_game/features/nav_bar/main_screen.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/room_match_screen.dart';
 import 'package:oxir_game/features/selected/presentation/screen/test.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MatchScreen extends StatefulWidget {
   final SportsEntity sportsEntity;
@@ -30,6 +35,8 @@ class _MatchScreenState extends State<MatchScreen> {
     super.initState();
   }
 
+  final PageController pageController = PageController();
+  static ValueNotifier<int> pageIndex = ValueNotifier(0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,46 +120,182 @@ class _MatchScreenState extends State<MatchScreen> {
                       // );
 
                       return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 30),
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            DiagonalImagesContainer(
-                              image1: data.teamAImageUrl!,
-                              image2: data.teamBImageUrl!,
-                            ),
-                            Positioned(
-                              bottom: -35,
-                              child: ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(24)),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                                  child: Container(
-                                    height: 75,
-                                    width:
-                                        MediaQuery.of(context).size.width / 2.2,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey.withOpacity(0.1),
-                                      border: Border.all(
-                                          color: Colors.white.withOpacity(0.2),
-                                          width: 1),
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(25),
-                                      ),
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: SmallText(
-                                      '${data.teamAName!} - ${data.teamBName!}',
-                                      textColorInLight: TEXT_LIGHT_COLOR,
-                                    ),
-                                  ),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(40),
+                                  topRight: Radius.circular(40),
                                 ),
                               ),
-                            ),
-                          ],
+                              backgroundColor: WHITE_COLOR,
+                              elevation: 0,
+                              useRootNavigator: true,
+                              context: context,
+                              builder: (context) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xff1b1f24),
+                                        border: Border(
+                                          top: BorderSide(
+                                            color: Color(0xffe9c475),
+                                          ),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Color.fromARGB(255, 97, 70, 11),
+                                            spreadRadius: 1,
+                                            blurRadius: 20,
+                                            offset: Offset(0, -15),
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(40),
+                                          topRight: Radius.circular(40),
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 30),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 300,
+                                            child: PageView.builder(
+                                              itemCount: 2,
+                                              scrollDirection: Axis.horizontal,
+                                              controller: pageController,
+                                              onPageChanged: (value) {
+                                                pageIndex.value = value;
+                                              },
+                                              itemBuilder: (context, index) {
+                                                return Column(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                      child: index == 0
+                                                          ? Image.network(
+                                                              '${Constants.baseUrl}${data.teamAImageUrl!}',
+                                                              height: 125,
+                                                              width: 125,
+                                                            )
+                                                          : Image.network(
+                                                              '${Constants.baseUrl}${data.teamBImageUrl!}',
+                                                              height: 125,
+                                                              width: 125,
+                                                            ),
+                                                    ),
+                                                    const VerticalSpace(12),
+                                                    SizedBox(
+                                                      width: 300,
+                                                      child: Center(
+                                                        child:
+                                                            RatingBar.builder(
+                                                          itemSize: 35,
+                                                          ignoreGestures: true,
+                                                          initialRating: index ==
+                                                                  0
+                                                              ? double.parse(data
+                                                                  .teamAStars
+                                                                  .toString())
+                                                              : double.parse(data
+                                                                  .teamBStars
+                                                                  .toString()),
+                                                          minRating: 1,
+                                                          direction:
+                                                              Axis.horizontal,
+                                                          allowHalfRating: true,
+                                                          itemCount: 5,
+                                                          itemPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      4.0),
+                                                          itemBuilder:
+                                                              (context, _) =>
+                                                                  const Icon(
+                                                            Icons.star,
+                                                            color: Colors.amber,
+                                                          ),
+                                                          onRatingUpdate:
+                                                              (rating) {},
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const VerticalSpace(12),
+                                                    BigBoldText(
+                                                      index == 0
+                                                          ? data.teamAName!
+                                                          : data.teamBName!,
+                                                      textColorInLight:
+                                                          TEXT_LIGHT_COLOR,
+                                                    ),
+                                                    const VerticalSpace(12),
+                                                    NormalBoldText(
+                                                      data.countDown!
+                                                          .toString()
+                                                          .toPersianDate(),
+                                                    ),
+                                                    const VerticalSpace(24),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          SmoothPageIndicator(
+                                            controller:
+                                                pageController, // PageController
+                                            count: 2,
+                                            effect:
+                                                const WormEffect(), // your preferred effect
+                                            onDotClicked: (index) {},
+                                          ),
+                                          const VerticalSpace(12),
+                                          ValueListenableBuilder(
+                                            valueListenable: pageIndex,
+                                            builder: (context, value, child) {
+                                              return Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .7,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.blue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                alignment: Alignment.center,
+                                                child: NormalText(
+                                                  value == 0
+                                                      ? '${data.teamAName} wins'
+                                                      : '${data.teamBName} wins',
+                                                  textColorInLight:
+                                                      TEXT_LIGHT_COLOR,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: DiagonalImagesContainer(
+                            image1: data.teamAImageUrl!,
+                            image2: data.teamBImageUrl!,
+                          ),
                         ),
                       );
                     },
