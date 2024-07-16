@@ -11,9 +11,8 @@ import 'package:oxir_game/features/nav_bar/main_screen.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
-import 'package:oxir_game/features/selected/presentation/screen/room_match_screen.dart';
 import 'package:oxir_game/features/selected/presentation/screen/test.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:oxir_game/features/selected/presentation/screen/timer_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MatchScreen extends StatefulWidget {
@@ -166,7 +165,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                            height: 300,
+                                            height: 500,
                                             child: PageView.builder(
                                               itemCount: 2,
                                               scrollDirection: Axis.horizontal,
@@ -239,10 +238,39 @@ class _MatchScreenState extends State<MatchScreen> {
                                                           TEXT_LIGHT_COLOR,
                                                     ),
                                                     const VerticalSpace(12),
-                                                    NormalBoldText(
-                                                      data.countDown!
-                                                          .toString()
-                                                          .toPersianDate(),
+                                                    CountdownWidget(
+                                                      targetTimestamp: data
+                                                          .endOffsetUnixSecendTime!,
+                                                      chartCreationTimestamp: data
+                                                          .startOffsetUnixSecendTime!,
+                                                    ),
+                                                    const VerticalSpace(12),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Image.asset(
+                                                          'assets/icons/coin.png',
+                                                          height: 24,
+                                                          width: 24,
+                                                        ),
+                                                        const HorizontalSpace(
+                                                            8),
+                                                        NormalText(
+                                                          index == 0
+                                                              ? data
+                                                                  .teamATokenDepositValue!
+                                                                  .toStringAsFixed(
+                                                                      0)
+                                                              : data
+                                                                  .teamBTokenDepositValue!
+                                                                  .toStringAsFixed(
+                                                                      0),
+                                                          textColorInLight:
+                                                              Colors.white,
+                                                        ),
+                                                      ],
                                                     ),
                                                     const VerticalSpace(24),
                                                   ],
@@ -267,14 +295,14 @@ class _MatchScreenState extends State<MatchScreen> {
                                                         .size
                                                         .width *
                                                     .7,
-                                                height: 40,
+                                                height: 60,
                                                 decoration: BoxDecoration(
                                                   color: Colors.blue,
                                                   borderRadius:
                                                       BorderRadius.circular(12),
                                                 ),
                                                 alignment: Alignment.center,
-                                                child: NormalText(
+                                                child: BigBoldText(
                                                   value == 0
                                                       ? '${data.teamAName} wins'
                                                       : '${data.teamBName} wins',

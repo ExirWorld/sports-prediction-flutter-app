@@ -63,6 +63,7 @@ dependencies:
   animated_notch_bottom_bar: ^1.0.3
   flutter_rating_bar: ^4.0.1
   persian_number_utility: ^1.1.4
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:

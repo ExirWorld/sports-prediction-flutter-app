@@ -16,9 +16,12 @@ class MatchEntity extends Equatable {
   final String? teamBDesc;
   final int? teamAStars;
   final int? teamBStars;
+  final num? teamATokenDepositValue;
+  final num? teamBTokenDepositValue;
   final String? matchDate;
   final String? matchStartDate;
-  final num? countDown;
+  final int? endOffsetUnixSecendTime;
+  final int? startOffsetUnixSecendTime;
   final String? matchEndDate;
   final bool? matchEnded;
   final dynamic palyedDate;
@@ -43,9 +46,12 @@ class MatchEntity extends Equatable {
     this.teamBDesc,
     this.teamAStars,
     this.teamBStars,
+    this.teamATokenDepositValue,
+    this.teamBTokenDepositValue,
     this.matchDate,
     this.matchStartDate,
-    this.countDown,
+    this.endOffsetUnixSecendTime,
+    this.startOffsetUnixSecendTime,
     this.matchEndDate,
     this.matchEnded,
     this.palyedDate,
@@ -72,9 +78,12 @@ class MatchEntity extends Equatable {
         teamBDesc,
         teamAStars,
         teamBStars,
+        teamATokenDepositValue,
+        teamBTokenDepositValue,
         matchDate,
         matchStartDate,
-        countDown,
+        endOffsetUnixSecendTime,
+        startOffsetUnixSecendTime,
         matchEndDate,
         matchEnded,
         palyedDate,
