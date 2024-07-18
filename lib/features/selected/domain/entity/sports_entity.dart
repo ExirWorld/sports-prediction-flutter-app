@@ -4,7 +4,9 @@ class SportsEntity extends Equatable {
   final int? sportId;
   final String? sportName;
   final String? sportImageUrl;
-  final String? sportColor;
+  final String? sportColor1;
+  final String? sportColor2;
+  final String? sportColor3;
   final int? status;
   final String? createDate;
 
@@ -12,12 +14,22 @@ class SportsEntity extends Equatable {
     this.sportId,
     this.sportName,
     this.sportImageUrl,
-    this.sportColor,
+    this.sportColor1,
+    this.sportColor2,
+    this.sportColor3,
     this.status,
     this.createDate,
   });
 
   @override
-  List<Object?> get props =>
-      [sportId, sportName, sportImageUrl, sportColor, status, createDate];
+  List<Object?> get props => [
+        sportId,
+        sportName,
+        sportImageUrl,
+        sportColor1,
+        sportColor2,
+        sportColor3,
+        status,
+        createDate
+      ];
 }

@@ -8,7 +8,9 @@ class LeagueModel extends LeagueEntity {
     super.sportRef,
     super.leagueName,
     super.leagueImageUrl,
-    super.leagueColor,
+    super.leagueColor1,
+    super.leagueColor2,
+    super.leagueColor3,
     super.status,
     super.createDate,
   });
@@ -18,7 +20,9 @@ class LeagueModel extends LeagueEntity {
         sportRef: json['sportRef'] as int?,
         leagueName: json['leagueName'] as String?,
         leagueImageUrl: json['leagueImageUrl'] as String?,
-        leagueColor: json['leagueColor'] as String?,
+        leagueColor1: json['leagueColor1'] as String?,
+        leagueColor2: json['leagueColor2'] as String?,
+        leagueColor3: json['leagueColor3'] as String?,
         status: json['status'] as int?,
         createDate: json['createDate'] as String?,
       );
@@ -28,7 +32,9 @@ class LeagueModel extends LeagueEntity {
         'sportRef': sportRef,
         'leagueName': leagueName,
         'leagueImageUrl': leagueImageUrl,
-        'leagueColor': leagueColor,
+        'leagueColor1': leagueColor1,
+        'leagueColor2': leagueColor2,
+        'leagueColor3': leagueColor3,
         'status': status,
         'createDate': createDate,
       };

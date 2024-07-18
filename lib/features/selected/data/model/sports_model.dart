@@ -7,7 +7,9 @@ class SportsModel extends SportsEntity {
     super.sportId,
     super.sportName,
     super.sportImageUrl,
-    super.sportColor,
+    super.sportColor1,
+    super.sportColor2,
+    super.sportColor3,
     super.status,
     super.createDate,
   });
@@ -16,7 +18,9 @@ class SportsModel extends SportsEntity {
         sportId: json['sportId'] as int?,
         sportName: json['sportName'] as String?,
         sportImageUrl: json['sportImageUrl'] as String?,
-        sportColor: json['sportColor'] as String?,
+        sportColor1: json['sportColor1'] as String?,
+        sportColor2: json['sportColor2'] as String?,
+        sportColor3: json['sportColor3'] as String?,
         status: json['status'] as int?,
         createDate: json['createDate'] as String?,
       );
@@ -25,7 +29,9 @@ class SportsModel extends SportsEntity {
         'sportId': sportId,
         'sportName': sportName,
         'sportImageUrl': sportImageUrl,
-        'sportColor': sportColor,
+        'sportColor1': sportColor1,
+        'sportColor2': sportColor2,
+        'sportColor3': sportColor3,
         'status': status,
         'createDate': createDate,
       };

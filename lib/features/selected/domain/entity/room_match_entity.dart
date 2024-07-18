@@ -7,8 +7,10 @@ class RoomMatchEntity extends Equatable {
   final String? roomImageUrl;
   final String? roomMatchName;
   final String? roomMatchImageUrl;
-  final String? roomMatchColor;
-  final num? allTokenValue;
+  final String? roomMatchColor1;
+  final String? roomMatchColor2;
+  final String? roomMatchColor3;
+  final String? allTokenValueStr;
   final num? tokenDepositValue;
   final int? seatCount;
   final num? winnerSeatVal;
@@ -24,8 +26,10 @@ class RoomMatchEntity extends Equatable {
     this.roomImageUrl,
     this.roomMatchName,
     this.roomMatchImageUrl,
-    this.roomMatchColor,
-    this.allTokenValue,
+    this.roomMatchColor1,
+    this.roomMatchColor2,
+    this.roomMatchColor3,
+    this.allTokenValueStr,
     this.tokenDepositValue,
     this.seatCount,
     this.winnerSeatVal,
@@ -43,8 +47,10 @@ class RoomMatchEntity extends Equatable {
         roomImageUrl,
         roomMatchName,
         roomMatchImageUrl,
-        roomMatchColor,
-        allTokenValue,
+        roomMatchColor1,
+        roomMatchColor2,
+        roomMatchColor3,
+        allTokenValueStr,
         tokenDepositValue,
         seatCount,
         winnerSeatVal,

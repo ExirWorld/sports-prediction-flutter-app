@@ -11,6 +11,7 @@ import 'package:oxir_game/features/nav_bar/main_screen.dart';
 import 'package:oxir_game/features/selected/domain/entity/league_entity.dart';
 import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
+import 'package:oxir_game/features/selected/presentation/screen/room_match_screen.dart';
 import 'package:oxir_game/features/selected/presentation/screen/test.dart';
 import 'package:oxir_game/features/selected/presentation/screen/timer_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -165,7 +166,7 @@ class _MatchScreenState extends State<MatchScreen> {
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                            height: 500,
+                                            height: 450,
                                             child: PageView.builder(
                                               itemCount: 2,
                                               scrollDirection: Axis.horizontal,
@@ -290,24 +291,57 @@ class _MatchScreenState extends State<MatchScreen> {
                                           ValueListenableBuilder(
                                             valueListenable: pageIndex,
                                             builder: (context, value, child) {
-                                              return Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .7,
-                                                height: 60,
-                                                decoration: BoxDecoration(
-                                                  color: Colors.blue,
-                                                  borderRadius:
-                                                      BorderRadius.circular(12),
-                                                ),
-                                                alignment: Alignment.center,
-                                                child: BigBoldText(
-                                                  value == 0
-                                                      ? '${data.teamAName} wins'
-                                                      : '${data.teamBName} wins',
-                                                  textColorInLight:
-                                                      TEXT_LIGHT_COLOR,
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              RoomMatchScreen(
+                                                                matchRef: data
+                                                                    .matchsId
+                                                                    .toString(),
+                                                                sportRef: data
+                                                                    .sportRef
+                                                                    .toString(),
+                                                                leagueRef: data
+                                                                    .leagueRef
+                                                                    .toString(),
+                                                                teamRef: index ==
+                                                                        0
+                                                                    ? data
+                                                                        .teamARef
+                                                                        .toString()
+                                                                    : data
+                                                                        .teamBRef
+                                                                        .toString(),
+                                                                imageTeamUrl: index == 0
+                                                                    ? data
+                                                                        .teamAImageUrl!
+                                                                    : data
+                                                                        .teamBImageUrl!,
+                                                              )));
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .7,
+                                                  height: 60,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.blue,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  child: BigBoldText(
+                                                    value == 0
+                                                        ? '${data.teamAName} wins'
+                                                        : '${data.teamBName} wins',
+                                                    textColorInLight:
+                                                        TEXT_LIGHT_COLOR,
+                                                  ),
                                                 ),
                                               );
                                             },

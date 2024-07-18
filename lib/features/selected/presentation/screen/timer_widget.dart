@@ -8,7 +8,7 @@ import 'package:oxir_game/core/common/text_widgets.dart';
 class CountdownNotifier extends ValueNotifier<String> {
   final int targetTimestamp;
   final int chartCreationTimestamp;
-  late Timer _timer;
+  Timer? _timer;
   late Duration initialDifference;
 
   CountdownNotifier(this.targetTimestamp, this.chartCreationTimestamp)
@@ -37,7 +37,7 @@ class CountdownNotifier extends ValueNotifier<String> {
 
     if (difference.isNegative) {
       value = '0 days 0 hours 0 minutes And 0 seconds';
-      _timer.cancel();
+      _timer?.cancel();
     } else {
       int days = difference.inDays;
       int hours = difference.inHours % 24;
@@ -61,7 +61,7 @@ class CountdownNotifier extends ValueNotifier<String> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 }
@@ -116,13 +116,13 @@ class _CountdownWidgetState extends State<CountdownWidget> {
                     remainingColor,
                     passedColor,
                   ),
-                  centerSpaceRadius: 75,
+                  centerSpaceRadius: 60,
                   startDegreeOffset: -90,
                 ),
               ),
               Positioned.fill(
                 child: Center(
-                  child: NormalText(
+                  child: SmallText(
                     value,
                     textColorInLight: Colors.white,
                   ),
