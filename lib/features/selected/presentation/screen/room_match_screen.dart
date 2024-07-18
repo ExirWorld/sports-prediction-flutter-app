@@ -232,7 +232,7 @@ class _RoomMatchScreenState extends State<RoomMatchScreen> {
                                                 ),
                                                 alignment: Alignment.center,
                                                 child: state
-                                                        is AddPositionCompleted
+                                                        is AddPositionLoading
                                                     ? const CupertinoActivityIndicator(
                                                         color: WHITE_COLOR)
                                                     : const BigBoldText(
