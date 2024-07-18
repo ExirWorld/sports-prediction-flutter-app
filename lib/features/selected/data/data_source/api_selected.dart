@@ -44,12 +44,12 @@ class ApiSelected {
     String roomMatchRef,
   ) async {
     final resposne = await httpclient.post('Play/AddPosition', data: {
-      "sportRef": "string",
-      "leagueRef": "string",
-      "matchRef": "string",
-      "teamRef": "string",
-      "roomRef": "string",
-      "roomMatchRef": "string"
+      "sportRef": sportRef,
+      "leagueRef": leagueRef,
+      "matchRef": matchRef,
+      "teamRef": teamRef,
+      "roomRef": roomRef,
+      "roomMatchRef": roomMatchRef,
     });
     return resposne;
   }

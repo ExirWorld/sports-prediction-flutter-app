@@ -13,8 +13,8 @@ class RoomMatchEntity extends Equatable {
   final String? allTokenValueStr;
   final num? tokenDepositValue;
   final int? seatCount;
-  final num? winnerSeatVal;
-  final num? looserSeatVal;
+  final String? winnerSeatValStr;
+  final String? looserSeatValStr;
   final int? status;
   final String? desc;
   final String? createDate;
@@ -32,8 +32,8 @@ class RoomMatchEntity extends Equatable {
     this.allTokenValueStr,
     this.tokenDepositValue,
     this.seatCount,
-    this.winnerSeatVal,
-    this.looserSeatVal,
+    this.winnerSeatValStr,
+    this.looserSeatValStr,
     this.status,
     this.desc,
     this.createDate,
@@ -53,8 +53,8 @@ class RoomMatchEntity extends Equatable {
         allTokenValueStr,
         tokenDepositValue,
         seatCount,
-        winnerSeatVal,
-        looserSeatVal,
+        winnerSeatValStr,
+        looserSeatValStr,
         status,
         desc,
         createDate,
