@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oxir_game/core/locator/di/di.dart';
 import 'package:oxir_game/features/Timer/bloc/timer_bloc.dart';
 import 'package:oxir_game/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:oxir_game/features/friends/presentation/bloc/friends_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/splash/bloc/splash_bloc.dart';
 import 'package:oxir_game/features/splash/splash.dart';
@@ -45,6 +46,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => getIt<SelectedBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<FriendsBloc>(),
         ),
       ],
       child: MaterialApp(

@@ -77,6 +77,9 @@ class $AssetsIconsGen {
   AssetGenImage get lightning =>
       const AssetGenImage('assets/icons/lightning.png');
 
+  /// File path: assets/icons/love.png
+  AssetGenImage get love => const AssetGenImage('assets/icons/love.png');
+
   /// File path: assets/icons/main.png
   AssetGenImage get main => const AssetGenImage('assets/icons/main.png');
 
@@ -145,6 +148,7 @@ class $AssetsIconsGen {
         info,
         inventory,
         lightning,
+        love,
         main,
         menu,
         message,
@@ -187,6 +191,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/hamster.png
   AssetGenImage get hamster => const AssetGenImage('assets/images/hamster.png');
 
+  /// File path: assets/images/katana_4773942.png
+  AssetGenImage get katana4773942 =>
+      const AssetGenImage('assets/images/katana_4773942.png');
+
   /// File path: assets/images/kif.png
   AssetGenImage get kif => const AssetGenImage('assets/images/kif.png');
 
@@ -208,6 +216,7 @@ class $AssetsImagesGen {
         element,
         forgetfulness,
         hamster,
+        katana4773942,
         kif,
         play,
         search,

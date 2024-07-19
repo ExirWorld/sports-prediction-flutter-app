@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
+import 'package:oxir_game/features/friends/presentation/screen/friends_screen.dart';
 import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 import 'package:oxir_game/features/home/home_screen.dart';
 import 'package:oxir_game/features/nav_bar/nav_model.dart';
@@ -34,15 +35,7 @@ class _MainScreenState extends State<MainScreen> {
         navkey: searchNavKey,
       ),
       NavModel(
-        page: const Scaffold(
-          backgroundColor: Colors.black,
-          body: Center(
-            child: SmallText(
-              'Profile',
-              textColorInLight: TEXT_LIGHT_COLOR,
-            ),
-          ),
-        ),
+        page: const FriendsScreen(),
         navkey: notificationNavKey,
       ),
       NavModel(
