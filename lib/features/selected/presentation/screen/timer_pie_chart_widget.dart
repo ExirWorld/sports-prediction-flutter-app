@@ -36,7 +36,7 @@ class CountdownNotifier extends ValueNotifier<String> {
     Duration difference = targetDate.difference(now);
 
     if (difference.isNegative) {
-      value = '0 days 0 hours 0 minutes And 0 seconds';
+      value = '0d:0h:0m:0s';
       _timer?.cancel();
     } else {
       int days = difference.inDays;
@@ -71,38 +71,40 @@ class CountdownWidget extends StatefulWidget {
   final int chartCreationTimestamp;
 
   const CountdownWidget({
-    Key? key,
+    super.key,
     required this.targetTimestamp,
     required this.chartCreationTimestamp,
-  }) : super(key: key);
+  });
 
   @override
   _CountdownWidgetState createState() => _CountdownWidgetState();
 }
 
 class _CountdownWidgetState extends State<CountdownWidget> {
-  late CountdownNotifier _countdownNotifier;
+  late CountdownNotifier countdownNotifier;
 
   @override
   void initState() {
     super.initState();
-    _countdownNotifier = CountdownNotifier(
-        widget.targetTimestamp, widget.chartCreationTimestamp);
+    countdownNotifier =
+        PageStorage.of(context).readState(context) as CountdownNotifier? ??
+            CountdownNotifier(
+                widget.targetTimestamp, widget.chartCreationTimestamp);
+    PageStorage.of(context).writeState(context, countdownNotifier);
   }
 
   @override
   void dispose() {
-    _countdownNotifier.dispose();
+    countdownNotifier.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<String>(
-      valueListenable: _countdownNotifier,
+      valueListenable: countdownNotifier,
       builder: (context, value, child) {
-        double remainingPercentage =
-            _countdownNotifier.getRemainingPercentage();
+        double remainingPercentage = countdownNotifier.getRemainingPercentage();
         Color remainingColor = Colors.white24;
         Color passedColor = Colors.yellow[700]!;
         return Expanded(

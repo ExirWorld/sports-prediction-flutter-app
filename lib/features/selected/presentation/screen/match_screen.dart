@@ -13,7 +13,7 @@ import 'package:oxir_game/features/selected/domain/entity/sports_entity.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/room_match_screen.dart';
 import 'package:oxir_game/features/selected/presentation/screen/test.dart';
-import 'package:oxir_game/features/selected/presentation/screen/timer_widget.dart';
+import 'package:oxir_game/features/selected/presentation/screen/timer_pie_chart_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MatchScreen extends StatefulWidget {
@@ -298,28 +298,12 @@ class _MatchScreenState extends State<MatchScreen> {
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               RoomMatchScreen(
-                                                                matchRef: data
-                                                                    .matchsId
-                                                                    .toString(),
-                                                                sportRef: data
-                                                                    .sportRef
-                                                                    .toString(),
-                                                                leagueRef: data
-                                                                    .leagueRef
-                                                                    .toString(),
-                                                                teamRef: index ==
-                                                                        0
-                                                                    ? data
-                                                                        .teamARef
-                                                                        .toString()
-                                                                    : data
-                                                                        .teamBRef
-                                                                        .toString(),
-                                                                imageTeamUrl: index == 0
-                                                                    ? data
-                                                                        .teamAImageUrl!
-                                                                    : data
-                                                                        .teamBImageUrl!,
+                                                                matchEntity:
+                                                                    data,
+                                                                isTeamA:
+                                                                    value == 0
+                                                                        ? true
+                                                                        : false,
                                                               )));
                                                 },
                                                 child: Container(
