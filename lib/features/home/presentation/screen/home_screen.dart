@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -233,8 +234,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
-                                child: Image.network(
-                                  '${Constants.baseUrl}${imgUrl.imageUrl!}',
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      '${Constants.baseUrl}${imgUrl.imageUrl!}',
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -532,8 +540,15 @@ Widget _contentInfo(
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.network(
-                    '${Constants.baseUrl}${homePageEntity.ranksHeader?.teamImageUrl}',
+                  CachedNetworkImage(
+                    imageUrl:
+                        '${Constants.baseUrl}${homePageEntity.ranksHeader?.teamImageUrl}',
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                     fit: BoxFit.cover,
                   ),
                   Stack(
@@ -662,8 +677,16 @@ Widget _contentInfo(
                     padding: const EdgeInsets.all(4),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                          '${Constants.baseUrl}${data.userImageUrl!}'),
+                      child: CachedNetworkImage(
+                        imageUrl: '${Constants.baseUrl}${data.userImageUrl!}',
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const HorizontalSpace(8),

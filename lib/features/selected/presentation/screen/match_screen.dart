@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -182,13 +183,37 @@ class _MatchScreenState extends State<MatchScreen> {
                                                           BorderRadius.circular(
                                                               12),
                                                       child: index == 0
-                                                          ? Image.network(
-                                                              '${Constants.baseUrl}${data.teamAImageUrl!}',
+                                                          ? CachedNetworkImage(
+                                                              imageUrl:
+                                                                  '${Constants.baseUrl}${data.teamAImageUrl!}',
+                                                              progressIndicatorBuilder: (context,
+                                                                      url,
+                                                                      downloadProgress) =>
+                                                                  CircularProgressIndicator(
+                                                                      value: downloadProgress
+                                                                          .progress),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  const Icon(Icons
+                                                                      .error),
                                                               height: 125,
                                                               width: 125,
                                                             )
-                                                          : Image.network(
-                                                              '${Constants.baseUrl}${data.teamBImageUrl!}',
+                                                          : CachedNetworkImage(
+                                                              imageUrl:
+                                                                  '${Constants.baseUrl}${data.teamBImageUrl!}',
+                                                              progressIndicatorBuilder: (context,
+                                                                      url,
+                                                                      downloadProgress) =>
+                                                                  CircularProgressIndicator(
+                                                                      value: downloadProgress
+                                                                          .progress),
+                                                              errorWidget: (context,
+                                                                      url,
+                                                                      error) =>
+                                                                  const Icon(Icons
+                                                                      .error),
                                                               height: 125,
                                                               width: 125,
                                                             ),

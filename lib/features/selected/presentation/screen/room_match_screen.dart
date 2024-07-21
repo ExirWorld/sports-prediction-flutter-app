@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -65,10 +66,16 @@ class _RoomMatchScreenState extends State<RoomMatchScreen> {
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
-                          Image.network(
-                            widget.isTeamA
+                          CachedNetworkImage(
+                            imageUrl: widget.isTeamA
                                 ? '${Constants.baseUrl}${widget.matchEntity.teamAImageUrl}'
                                 : '${Constants.baseUrl}${widget.matchEntity.teamBImageUrl}',
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                             fit: BoxFit.cover,
                           ),
                           Stack(
@@ -259,8 +266,19 @@ class _RoomMatchScreenState extends State<RoomMatchScreen> {
                                           ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(24),
-                                            child: Image.network(
-                                              '${Constants.baseUrl}${data.roomMatchImageUrl!}',
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  '${Constants.baseUrl}${data.roomMatchImageUrl!}',
+                                              progressIndicatorBuilder:
+                                                  (context, url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      const Icon(Icons.error),
                                               height: 150,
                                               width: 250,
                                               fit: BoxFit.cover,
@@ -415,10 +433,17 @@ class _RoomMatchScreenState extends State<RoomMatchScreen> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
-                                  child: Image.network(
-                                    '${Constants.baseUrl}${data.roomMatchImageUrl!}',
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        '${Constants.baseUrl}${data.roomMatchImageUrl!}',
+                                    progressIndicatorBuilder: (context, url,
+                                            downloadProgress) =>
+                                        CircularProgressIndicator(
+                                            value: downloadProgress.progress),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
                                     height: 150,
-                                    width: 200,
+                                    width: 250,
                                     fit: BoxFit.cover,
                                   ),
                                 ),

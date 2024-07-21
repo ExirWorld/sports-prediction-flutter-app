@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     items = [
       NavModel(
-        page: const HomeScreen(),
+        page: const SportsScreen(),
         navkey: airdropNavKey,
       ),
       // NavModel(

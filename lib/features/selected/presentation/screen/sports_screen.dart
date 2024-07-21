@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/constants.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/core/customui/more/margin_container.dart';
+import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
 import 'package:oxir_game/features/selected/presentation/bloc/selected_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/league_screen.dart';
 
@@ -34,10 +36,14 @@ class _SportsScreenState extends State<SportsScreen> {
         margin: 12,
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 8,
+              const BigBoldText(
+                'choose your sport',
+                
+                textColorInLight: Colors.white,
               ),
+              const VerticalSpace(24),
               BlocBuilder<SelectedBloc, SelectedState>(
                 buildWhen: (previous, current) {
                   return current is GetSportsCompleted ||
@@ -80,8 +86,16 @@ class _SportsScreenState extends State<SportsScreen> {
                                         topLeft: Radius.circular(24),
                                         topRight: Radius.circular(24),
                                       ),
-                                      child: Image.network(
-                                        '${Constants.baseUrl}${data.sportImageUrl!}',
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            '${Constants.baseUrl}${data.sportImageUrl!}',
+                                        progressIndicatorBuilder: (context, url,
+                                                downloadProgress) =>
+                                            CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(Icons.error),
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -133,8 +147,15 @@ class _SportsScreenState extends State<SportsScreen> {
                                       topLeft: Radius.circular(24),
                                       topRight: Radius.circular(24),
                                     ),
-                                    child: Image.network(
-                                      '${Constants.baseUrl}${data.sportImageUrl!}',
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          '${Constants.baseUrl}${data.sportImageUrl!}',
+                                      progressIndicatorBuilder: (context, url,
+                                              downloadProgress) =>
+                                          CircularProgressIndicator(
+                                              value: downloadProgress.progress),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(Icons.error),
                                       fit: BoxFit.cover,
                                     ),
                                   ),

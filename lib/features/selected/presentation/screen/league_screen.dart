@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,8 +98,16 @@ class _LeagueScreenState extends State<LeagueScreen> {
                                       ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(24),
-                                        child: Image.network(
-                                          '${Constants.baseUrl}${data.leagueImageUrl!}',
+                                        child: CachedNetworkImage(
+                                          imageUrl:
+                                              '${Constants.baseUrl}${data.leagueImageUrl!}',
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              CircularProgressIndicator(
+                                                  value: downloadProgress
+                                                      .progress),
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(Icons.error),
                                           fit: BoxFit.cover,
                                         ),
                                       ),

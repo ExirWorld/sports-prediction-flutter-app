@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/constants.dart';
 
@@ -5,11 +6,8 @@ class DiagonalImagesContainer extends StatefulWidget {
   final String image1;
   final String image2;
 
-  const DiagonalImagesContainer({
-    super.key,
-    required this.image1,
-    required this.image2,
-  });
+  const DiagonalImagesContainer(
+      {super.key, required this.image1, required this.image2});
 
   @override
   State<DiagonalImagesContainer> createState() =>
@@ -24,89 +22,79 @@ class _DiagonalImagesContainerState extends State<DiagonalImagesContainer> {
   Widget build(BuildContext context) {
     final String imageUrl1 = '${Constants.baseUrl}${widget.image1}';
     final String imageUrl2 = '${Constants.baseUrl}${widget.image2}';
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.center,
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: GestureDetector(
-            onTap: () {
-              isImage1Selected.value = !isImage1Selected.value;
-              if (isImage1Selected.value) {
-                isImage2Selected.value = false;
-              }
-            },
+    return SizedBox(
+      width: 350,
+      height: 250,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
             child: ClipPath(
               clipper: DiagonalClipper(),
-              child: Image.network(
-                imageUrl1,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl1,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
                 width: 350,
                 height: 250,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-        ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: GestureDetector(
-            onTap: () {
-              isImage2Selected.value = !isImage2Selected.value;
-              if (isImage2Selected.value) {
-                isImage1Selected.value = false;
-              }
-            },
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
             child: ClipPath(
               clipper: ReverseDiagonalClipper(),
-              child: Image.network(
-                imageUrl2,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl2,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
                 width: 350,
                 height: 250,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-        ),
-        ClipPath(
-          clipper: DiagonalLineClipper(),
-          child: Container(
-            width: 350,
-            height: 250,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-          ),
-        ),
-        Center(
-          child: Container(
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Color(0xffe9c475),
-                ),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 241, 193, 89),
-                  spreadRadius: 5,
-                  blurRadius: 10,
-                  offset: Offset(0, 0),
-                ),
-              ],
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
+          ClipPath(
+            clipper: DiagonalLineClipper(),
+            child: Container(
+              width: 350,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
               ),
             ),
-            child: Image.asset(
-              'assets/images/katana_4773942.png',
-              height: 50,
+          ),
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: Color(0xffe9c475),
+                  ),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(255, 241, 193, 89),
+                    spreadRadius: 5,
+                    blurRadius: 10,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              child: Image.asset(
+                'assets/images/katana_4773942.png',
+                height: 50,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
