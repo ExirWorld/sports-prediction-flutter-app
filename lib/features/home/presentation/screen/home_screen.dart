@@ -1,4 +1,13 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_button/flutter_animated_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/core/common/text_widgets.dart';
+import 'package:oxir_game/core/customui/more/empty_container.dart';
+import 'package:oxir_game/features/home/presentation/bloc/home_page_bloc.dart';
+import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 import 'package:oxir_game/gen/assets.gen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,87 +21,177 @@ class _HomeScreenState extends State<HomeScreen> {
   int _coins = 20000535;
   int _energy = 6000;
   @override
+  void initState() {
+    BlocProvider.of<HomePageBloc>(context).add(HomePageStartEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: _appbar(),
       body: SingleChildScrollView(
-        child: ListView(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            _titleInfo(),
-            Padding(
-              padding: const EdgeInsets.only(right: 8, left: 8, bottom: 16),
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Colors.white12,
-                  borderRadius: BorderRadius.circular(32),
-                  border: Border.all(
-                    color: const Color(0xffe9c475),
-                    width: .05,
-                  ),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Assets.icons.exirplus.image(height: 40),
-                    Container(
-                      width: .5,
-                      color: Colors.white24,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Profit per tap',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Color(0xffaf7c64),
+        child: BlocBuilder<HomePageBloc, HomePageState>(
+          buildWhen: (previous, current) {
+            return current is HomePageCompleted ||
+                    current is HomePageError ||
+                    current is HomePageLoading
+                ? true
+                : false;
+          },
+          builder: (context, state) {
+            if (state is HomePageCompleted) {
+              if (!state.homePageEntity.userFisrtTime!) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height - 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      _titleInfo(),
+                      Expanded(
+                        child: Center(
+                          child: AnimatedButton(
+                            height: 70,
+                            width: 200,
+                            text: 'Start Game',
+                            isReverse: true,
+                            selectedTextColor: Colors.black,
+                            transitionType: TransitionType.LEFT_TO_RIGHT,
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            backgroundColor: Colors.black,
+                            borderColor: Colors.white,
+                            borderRadius: 50,
+                            borderWidth: 2,
+                            animationDuration: const Duration(seconds: 1),
+                            onPress: () {
+                              Timer.periodic(
+                                const Duration(seconds: 1),
+                                (timer) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SportsScreen(),
+                                      ));
+                                  timer.cancel();
+                                },
+                              );
+                            },
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _titleInfo(),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(right: 8, left: 8, bottom: 16),
+                      child: Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: Colors.white12,
+                          borderRadius: BorderRadius.circular(32),
+                          border: Border.all(
+                            color: const Color(0xffe9c475),
+                            width: .05,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Assets.icons.coin.image(width: 25, height: 25),
-                            const SizedBox(width: 3),
-                            const Text(
-                              '+2.14M',
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
+                            Assets.icons.exirplus.image(height: 40),
+                            Container(
+                              width: .5,
+                              color: Colors.white24,
                             ),
-                            const SizedBox(width: 3),
-                            Assets.icons.info.image(height: 25, width: 25),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Profit per tap',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xffaf7c64),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Assets.icons.coin
+                                        .image(width: 25, height: 25),
+                                    const SizedBox(width: 3),
+                                    const Text(
+                                      '+2.14M',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    Assets.icons.info
+                                        .image(height: 25, width: 25),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Container(
+                              width: .5,
+                              color: Colors.white24,
+                            ),
+                            Assets.icons.setting
+                                .image(height: 40, color: Colors.white),
                           ],
-                        )
-                      ],
+                        ),
+                      ),
                     ),
-                    Container(
-                      width: .5,
-                      color: Colors.white24,
+                    _contentInfo(
+                      context,
+                      _coins,
+                      _energy,
+                      () {
+                        setState(() {
+                          _coins = _coins + 10;
+                          _energy = _energy - 10;
+                        });
+                      },
                     ),
-                    Assets.icons.setting.image(height: 40, color: Colors.white),
                   ],
+                );
+              }
+            } else if (state is HomePageLoading) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height - 200,
+                width: MediaQuery.of(context).size.width,
+                child: const Center(
+                    child: CupertinoActivityIndicator(color: Colors.white)),
+              );
+            } else if (state is HomePageError) {
+              return SizedBox(
+                height: MediaQuery.of(context).size.height - 200,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: SmallBoldText(
+                    state.errorText,
+                    textColorInLight: Colors.white,
+                  ),
                 ),
-              ),
-            ),
-            _contentInfo(
-              context,
-              _coins,
-              _energy,
-              () {
-                setState(() {
-                  _coins = _coins + 10;
-                  _energy = _energy - 10;
-                });
-              },
-            )
-          ],
+              );
+            } else {
+              return const EmptyContainer();
+            }
+          },
         ),
       ),
     );
@@ -178,6 +277,7 @@ Widget _contentInfo(
   VoidCallback onTap,
 ) {
   return Container(
+    height: MediaQuery.of(context).size.height,
     decoration: const BoxDecoration(
       color: Color(0xff1b1f24),
       border: Border(
@@ -218,53 +318,53 @@ Widget _contentInfo(
         ),
         // _titleContentInfo(),
 
-        const SizedBox(
-          height: 30,
-        ),
-        _countCoinContentInfo(coin),
+        // const SizedBox(
+        //   height: 30,
+        // ),
+        // _countCoinContentInfo(coin),
 
-        const SizedBox(
-          height: 20,
-        ),
-        _buttonPoints(context, () {
-          onTap();
-        }),
-        const SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: [
-              Assets.icons.lightning.image(height: 25, width: 25),
-              const SizedBox(
-                width: 8,
-              ),
-              const Text(
-                '10000 / 10000',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const Spacer(),
-              Assets.icons.rocket.image(height: 25, width: 25),
-              const SizedBox(
-                width: 8,
-              ),
-              const Text(
-                'Boost',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 120,
-        ),
+        // const SizedBox(
+        //   height: 20,
+        // ),
+        // _buttonPoints(context, () {
+        //   onTap();
+        // }),
+        // const SizedBox(
+        //   height: 16,
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 24),
+        //   child: Row(
+        //     children: [
+        //       Assets.icons.lightning.image(height: 25, width: 25),
+        //       const SizedBox(
+        //         width: 8,
+        //       ),
+        //       const Text(
+        //         '10000 / 10000',
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontWeight: FontWeight.w700,
+        //         ),
+        //       ),
+        //       const Spacer(),
+        //       Assets.icons.rocket.image(height: 25, width: 25),
+        //       const SizedBox(
+        //         width: 8,
+        //       ),
+        //       const Text(
+        //         'Boost',
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontWeight: FontWeight.w700,
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // const SizedBox(
+        //   height: 120,
+        // ),
         // _energyContentInfo(energy),
       ],
     ),

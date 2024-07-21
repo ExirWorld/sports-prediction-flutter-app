@@ -26,7 +26,7 @@ class HomePageModel extends HomePageEntity {
         userName: json['userName'] as String?,
         userImageUrl: json['userImageUrl'] as String?,
         desc: json['desc'] as String?,
-        myBalance: json['myBalance'] as int?,
+        myBalance: json['myBalance'] as num?,
         userFisrtTime: json['userFisrtTime'] as bool?,
         showUserPositionRanks: json['showUserPositionRanks'] as bool?,
         showUserHistory: json['showUserHistory'] as bool?,

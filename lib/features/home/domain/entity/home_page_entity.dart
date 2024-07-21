@@ -8,7 +8,7 @@ class HomePageEntity extends Equatable {
   final String? userName;
   final String? userImageUrl;
   final String? desc;
-  final int? myBalance;
+  final num? myBalance;
   final bool? userFisrtTime;
   final bool? showUserPositionRanks;
   final bool? showUserHistory;

@@ -10,11 +10,11 @@ class HistoryList {
   final int? positionNumber;
   final String? userTeamName;
   final String? winnerTeamName;
-  final int? deposidToken;
+  final num? deposidToken;
   final bool? winner;
-  final int? earnedToken;
-  final int? loosedToken;
-  final int? cashBackToken;
+  final num? earnedToken;
+  final num? loosedToken;
+  final num? cashBackToken;
 
   const HistoryList({
     this.positionResualtId,
@@ -41,11 +41,11 @@ class HistoryList {
         positionNumber: json['positionNumber'] as int?,
         userTeamName: json['userTeamName'] as String?,
         winnerTeamName: json['winnerTeamName'] as String?,
-        deposidToken: json['deposidToken'] as int?,
+        deposidToken: json['deposidToken'] as num?,
         winner: json['winner'] as bool?,
-        earnedToken: json['earnedToken'] as int?,
-        loosedToken: json['loosedToken'] as int?,
-        cashBackToken: json['cashBackToken'] as int?,
+        earnedToken: json['earnedToken'] as num?,
+        loosedToken: json['loosedToken'] as num?,
+        cashBackToken: json['cashBackToken'] as num?,
       );
 
   Map<String, dynamic> toJson() => {
