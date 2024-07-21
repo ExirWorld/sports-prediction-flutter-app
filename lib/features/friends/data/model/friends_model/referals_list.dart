@@ -5,7 +5,7 @@ class ReferalsList {
   final int? userReferalsId;
   final String? userName;
   final DateTime? userJoineddate;
-  final int? depositedTokenValue;
+  final num? depositedTokenValue;
   final String? createdDate;
 
   const ReferalsList({
@@ -22,7 +22,7 @@ class ReferalsList {
         userJoineddate: json['userJoineddate'] == null
             ? null
             : DateTime.parse(json['userJoineddate'] as String),
-        depositedTokenValue: json['depositedTokenValue'] as int?,
+        depositedTokenValue: json['depositedTokenValue'] as num?,
         createdDate: json['createdDate'] as String?,
       );
 

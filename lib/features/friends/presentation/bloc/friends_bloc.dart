@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:oxir_game/core/resources/data_state.dart';
 import 'package:oxir_game/features/friends/domain/entity/friends_entity.dart';
 import 'package:oxir_game/features/friends/domain/use_case/friends_usecase.dart';
@@ -9,6 +10,7 @@ import 'package:oxir_game/features/friends/domain/use_case/friends_usecase.dart'
 part 'friends_event.dart';
 part 'friends_state.dart';
 
+@injectable
 class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
   final FriendsUsecase friendsUsecase;
   FriendsBloc(this.friendsUsecase) : super(FriendsInitial()) {
