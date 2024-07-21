@@ -5,17 +5,14 @@ import 'package:oxir_game/core/common/text_widgets.dart';
 
 class CountdownTextNotifier extends ValueNotifier<String> {
   final int targetTimestamp;
-  final int chartCreationTimestamp;
   Timer? _timer;
   late Duration initialDifference;
 
-  CountdownTextNotifier(this.targetTimestamp, this.chartCreationTimestamp)
-      : super('') {
+  CountdownTextNotifier(this.targetTimestamp) : super('') {
+    DateTime now = DateTime.now().toUtc();
     initialDifference =
         DateTime.fromMillisecondsSinceEpoch(targetTimestamp * 1000, isUtc: true)
-            .difference(DateTime.fromMillisecondsSinceEpoch(
-                chartCreationTimestamp * 1000,
-                isUtc: true));
+            .difference(now);
     _startCountdown();
   }
 
@@ -66,12 +63,10 @@ class CountdownTextNotifier extends ValueNotifier<String> {
 
 class CountdownTextWidget extends StatefulWidget {
   final int targetTimestamp;
-  final int chartCreationTimestamp;
 
   const CountdownTextWidget({
     super.key,
     required this.targetTimestamp,
-    required this.chartCreationTimestamp,
   });
 
   @override
@@ -86,8 +81,7 @@ class _CountdownTextWidgetState extends State<CountdownTextWidget> {
     super.initState();
     countdownNotifier =
         PageStorage.of(context).readState(context) as CountdownTextNotifier? ??
-            CountdownTextNotifier(
-                widget.targetTimestamp, widget.chartCreationTimestamp);
+            CountdownTextNotifier(widget.targetTimestamp);
     PageStorage.of(context).writeState(context, countdownNotifier);
   }
 

@@ -4,10 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oxir_game/core/common/constants.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/core/customui/more/empty_container.dart';
+import 'package:oxir_game/core/customui/more/spacing_widgets.dart';
+import 'package:oxir_game/features/home/domain/entity/home_page_entity.dart';
 import 'package:oxir_game/features/home/presentation/bloc/home_page_bloc.dart';
 import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
+import 'package:oxir_game/features/selected/presentation/screen/timer_text_widget.dart';
 import 'package:oxir_game/gen/assets.gen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,13 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           builder: (context, state) {
             if (state is HomePageCompleted) {
-              if (!state.homePageEntity.userFisrtTime!) {
+              if (state.homePageEntity.userFisrtTime!) {
                 return SizedBox(
                   height: MediaQuery.of(context).size.height - 200,
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
-                      _titleInfo(),
+                      _titleInfo(state.homePageEntity.userName!,
+                          state.homePageEntity.desc!),
                       Expanded(
                         child: Center(
                           child: AnimatedButton(
@@ -92,74 +97,76 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    _titleInfo(),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(right: 8, left: 8, bottom: 16),
-                      child: Container(
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: Colors.white12,
-                          borderRadius: BorderRadius.circular(32),
-                          border: Border.all(
-                            color: const Color(0xffe9c475),
-                            width: .05,
-                          ),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Assets.icons.exirplus.image(height: 40),
-                            Container(
-                              width: .5,
-                              color: Colors.white24,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Profit per tap',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xffaf7c64),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Assets.icons.coin
-                                        .image(width: 25, height: 25),
-                                    const SizedBox(width: 3),
-                                    const Text(
-                                      '+2.14M',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 3),
-                                    Assets.icons.info
-                                        .image(height: 25, width: 25),
-                                  ],
-                                )
-                              ],
-                            ),
-                            Container(
-                              width: .5,
-                              color: Colors.white24,
-                            ),
-                            Assets.icons.setting
-                                .image(height: 40, color: Colors.white),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _titleInfo(state.homePageEntity.userName!,
+                        state.homePageEntity.desc!),
+                    // Padding(
+                    //   padding:
+                    //       const EdgeInsets.only(right: 8, left: 8, bottom: 16),
+                    //   child: Container(
+                    //     height: 70,
+                    //     decoration: BoxDecoration(
+                    //       color: Colors.white12,
+                    //       borderRadius: BorderRadius.circular(32),
+                    //       border: Border.all(
+                    //         color: const Color(0xffe9c475),
+                    //         width: .05,
+                    //       ),
+                    //     ),
+                    //     padding: const EdgeInsets.symmetric(
+                    //         horizontal: 16, vertical: 12),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //       children: [
+                    //         Assets.icons.exirplus.image(height: 40),
+                    //         Container(
+                    //           width: .5,
+                    //           color: Colors.white24,
+                    //         ),
+                    //         Column(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             const Text(
+                    //               'Profit per tap',
+                    //               style: TextStyle(
+                    //                 fontSize: 10,
+                    //                 color: Color(0xffaf7c64),
+                    //               ),
+                    //             ),
+                    //             Row(
+                    //               mainAxisAlignment: MainAxisAlignment.center,
+                    //               children: [
+                    //                 Assets.icons.coin
+                    //                     .image(width: 25, height: 25),
+                    //                 const SizedBox(width: 3),
+                    //                 const Text(
+                    //                   '+2.14M',
+                    //                   style: TextStyle(
+                    //                     fontSize: 12,
+                    //                     color: Colors.white,
+                    //                   ),
+                    //                 ),
+                    //                 const SizedBox(width: 3),
+                    //                 Assets.icons.info
+                    //                     .image(height: 25, width: 25),
+                    //               ],
+                    //             )
+                    //           ],
+                    //         ),
+                    //         Container(
+                    //           width: .5,
+                    //           color: Colors.white24,
+                    //         ),
+                    //         Assets.icons.setting
+                    //             .image(height: 40, color: Colors.white),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     _contentInfo(
                       context,
                       _coins,
                       _energy,
+                      state.homePageEntity,
                       () {
                         setState(() {
                           _coins = _coins + 10;
@@ -225,7 +232,7 @@ PreferredSize _appbar() {
       ));
 }
 
-Widget _titleInfo() {
+Widget _titleInfo(String title, String desc) {
   return Container(
     height: 70,
     margin: const EdgeInsets.only(left: 10, right: 10),
@@ -243,21 +250,21 @@ Widget _titleInfo() {
           child: Image.asset('assets/icons/exirplus.png'),
         ),
         const SizedBox(width: 12),
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'ART PROGRAMER',
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
             Text(
-              'CEO',
-              style: TextStyle(
+              desc,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -274,6 +281,7 @@ Widget _contentInfo(
   BuildContext context,
   int coin,
   int energy,
+  HomePageEntity homePageEntity,
   VoidCallback onTap,
 ) {
   return Container(
@@ -305,17 +313,206 @@ Widget _contentInfo(
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Container(
-            height: 275,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(24),
+          child: SizedBox(
+            height: 250,
+            width: double.infinity,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(32),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    '${Constants.baseUrl}${homePageEntity.ranksHeader?.teamImageUrl}',
+                    fit: BoxFit.cover,
+                  ),
+                  Stack(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * .3,
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 100,
+                              spreadRadius: 100,
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              homePageEntity.ranksHeader!.teamName!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              homePageEntity.ranksHeader!.leagueName!,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const VerticalSpace(20),
+                            Text(
+                              homePageEntity.ranksHeader!.sportName!,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const VerticalSpace(8),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                const Icon(
+                                  Icons.alarm,
+                                  color: Colors.amber,
+                                ),
+                                const HorizontalSpace(8),
+                                CountdownTextWidget(
+                                  targetTimestamp: homePageEntity
+                                      .ranksHeader!.offsetUnixSecendTime!,
+                                ),
+                                // ValueListenableBuilder<String>(
+                                //   valueListenable:
+                                //       CountdownWidget.countdownNotifier,
+                                //   builder: (context, value, child) {
+                                //     return Text(
+                                //       value
+                                //           .replaceAll(' days ', 'd:')
+                                //           .replaceAll(' hours ', 'h:')
+                                //           .replaceAll(' minutes ', 'm:')
+                                //           .replaceAll('And ', '')
+                                //           .replaceAll(' seconds', 's'),
+                                //       style: const TextStyle(
+                                //           fontSize: 12,
+                                //           color: Colors.white),
+                                //     );
+                                //   },
+                                // ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Divider(color: Colors.grey.withOpacity(.5)),
+                            Row(
+                              children: [
+                                const Text(
+                                  'Deposit:',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const HorizontalSpace(8),
+                                Image.asset(
+                                  'assets/icons/coin.png',
+                                  height: 18,
+                                ),
+                                const HorizontalSpace(4),
+                                Text(
+                                  homePageEntity
+                                      .ranksHeader!.tokenDepositValue!,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         const SizedBox(
           height: 12,
         ),
+        ListView.builder(
+          itemCount: homePageEntity.ranksUsersList?.length,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            final data = homePageEntity.ranksUsersList?[index];
+            return Container(
+              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+              height: 60,
+              decoration: BoxDecoration(
+                color: const Color(0xff272a2f),
+                borderRadius: BorderRadius.circular(12),
+                border: data!.itsMe! ? Border.all(color: Colors.amber) : null,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white12,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.all(4),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                          '${Constants.baseUrl}${data.userImageUrl!}'),
+                    ),
+                  ),
+                  const HorizontalSpace(8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        data.userName!,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.circle,
+                            color: Colors.amber,
+                            size: 8,
+                          ),
+                          const HorizontalSpace(4),
+                          Icon(
+                            Icons.workspace_premium_outlined,
+                            color: data.itsMe! ? Colors.amber : Colors.grey,
+                          ),
+                          const HorizontalSpace(4),
+                          Text(
+                            data.userRef!.toStringAsFixed(0),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+
         // _titleContentInfo(),
 
         // const SizedBox(

@@ -131,12 +131,8 @@ class _RoomMatchScreenState extends State<RoomMatchScreen> {
                                         ),
                                         const HorizontalSpace(8),
                                         CountdownTextWidget(
-                                          targetTimestamp: widget.matchEntity
-                                              .endOffsetUnixSecendTime!,
-                                          chartCreationTimestamp: widget
-                                              .matchEntity
-                                              .startOffsetUnixSecendTime!,
-                                        ),
+                                            targetTimestamp: widget.matchEntity
+                                                .endOffsetUnixSecendTime!),
                                         // ValueListenableBuilder<String>(
                                         //   valueListenable:
                                         //       CountdownWidget.countdownNotifier,
