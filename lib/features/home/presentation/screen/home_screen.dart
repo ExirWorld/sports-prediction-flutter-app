@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
@@ -92,13 +93,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 );
-              } else {
+              } else if (state.homePageEntity.showUserHistory == false) {
                 return ListView(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     _titleInfo(state.homePageEntity.userName!,
                         state.homePageEntity.desc!),
+
                     // Padding(
                     //   padding:
                     //       const EdgeInsets.only(right: 8, left: 8, bottom: 16),
@@ -168,10 +170,219 @@ class _HomeScreenState extends State<HomeScreen> {
                       _energy,
                       state.homePageEntity,
                       () {
-                        setState(() {
-                          _coins = _coins + 10;
-                          _energy = _energy - 10;
-                        });
+                        // setState(() {
+                        //   _coins = _coins + 10;
+                        //   _energy = _energy - 10;
+                        // });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _titleInfo(state.homePageEntity.userName!,
+                        state.homePageEntity.desc!),
+                    Align(
+                      alignment: Alignment.center,
+                      child: AnimatedButton(
+                        height: 70,
+                        width: 200,
+                        text: 'Start Game',
+                        isReverse: true,
+                        selectedTextColor: Colors.black,
+                        transitionType: TransitionType.LEFT_TO_RIGHT,
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        backgroundColor: Colors.black,
+                        borderColor: Colors.white,
+                        borderRadius: 50,
+                        borderWidth: 2,
+                        animationDuration: const Duration(seconds: 1),
+                        onPress: () {
+                          Timer.periodic(
+                            const Duration(seconds: 1),
+                            (timer) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SportsScreen(),
+                                  ));
+                              timer.cancel();
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const VerticalSpace(24),
+                    CarouselSlider(
+                      items:
+                          state.homePageEntity.firstTimeSlider?.map((imgUrl) {
+                        return Builder(
+                          builder: (BuildContext context) {
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: const BoxDecoration(
+                                color: Colors.transparent,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.network(
+                                  '${Constants.baseUrl}${imgUrl.imageUrl!}',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                      options: CarouselOptions(
+                        height: 300.0,
+                        viewportFraction: 0.9,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 3),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 800),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                      ),
+                    ),
+                    const VerticalSpace(24),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          SmallText(
+                            'My History Game',
+                            textColorInLight: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                    ListView.builder(
+                      itemCount: state.homePageEntity.historyList?.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        final data = state.homePageEntity.historyList?[index];
+                        return Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 4, horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff272a2f),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          child: Row(
+                            children: [
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.white12,
+                              //     borderRadius: BorderRadius.circular(12),
+                              //   ),
+                              //   padding: const EdgeInsets.all(4),
+                              //   child: ClipRRect(
+                              //     borderRadius: BorderRadius.circular(8),
+                              //     child: Image.network(
+                              //         '${Constants.baseUrl}${data.!}'),
+                              //   ),
+                              // ),
+                              // const HorizontalSpace(8),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'user:',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      const HorizontalSpace(4),
+                                      Text(
+                                        data!.userName!,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'winner:',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      const HorizontalSpace(4),
+                                      const Icon(
+                                        Icons.circle,
+                                        color: Colors.grey,
+                                        size: 8,
+                                      ),
+                                      const HorizontalSpace(4),
+                                      Text(
+                                        data.winnerTeamName!,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        'RoomName:',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      const HorizontalSpace(4),
+                                      const Icon(
+                                        Icons.circle,
+                                        color: Colors.grey,
+                                        size: 8,
+                                      ),
+                                      const HorizontalSpace(4),
+                                      Text(
+                                        data.roomName!,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Spacer(),
+                              data.winner!
+                                  ? Image.asset(
+                                      'assets/icons/cup.png',
+                                      height: 32,
+                                    )
+                                  : const Icon(
+                                      Icons.heart_broken_outlined,
+                                      color: Colors.grey,
+                                      size: 32,
+                                    ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ],
@@ -383,23 +594,6 @@ Widget _contentInfo(
                                   targetTimestamp: homePageEntity
                                       .ranksHeader!.offsetUnixSecendTime!,
                                 ),
-                                // ValueListenableBuilder<String>(
-                                //   valueListenable:
-                                //       CountdownWidget.countdownNotifier,
-                                //   builder: (context, value, child) {
-                                //     return Text(
-                                //       value
-                                //           .replaceAll(' days ', 'd:')
-                                //           .replaceAll(' hours ', 'h:')
-                                //           .replaceAll(' minutes ', 'm:')
-                                //           .replaceAll('And ', '')
-                                //           .replaceAll(' seconds', 's'),
-                                //       style: const TextStyle(
-                                //           fontSize: 12,
-                                //           color: Colors.white),
-                                //     );
-                                //   },
-                                // ),
                               ],
                             ),
                             const Spacer(),
