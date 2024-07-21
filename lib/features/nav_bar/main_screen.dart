@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final echangeNavKey = GlobalKey<NavigatorState>();
-  final searchNavKey = GlobalKey<NavigatorState>();
+  // final searchNavKey = GlobalKey<NavigatorState>();
   final notificationNavKey = GlobalKey<NavigatorState>();
   final profileNavKey = GlobalKey<NavigatorState>();
   final airdropNavKey = GlobalKey<NavigatorState>();
@@ -30,10 +30,10 @@ class _MainScreenState extends State<MainScreen> {
         page: const HomeScreen(),
         navkey: airdropNavKey,
       ),
-      NavModel(
-        page: const SportsScreen(),
-        navkey: searchNavKey,
-      ),
+      // NavModel(
+      //   page: const SportsScreen(),
+      //   navkey: searchNavKey,
+      // ),
       NavModel(
         page: const FriendsScreen(),
         navkey: notificationNavKey,
