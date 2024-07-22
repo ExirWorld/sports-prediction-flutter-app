@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:oxir_game/core/common/colors.dart';
 import 'package:oxir_game/core/common/text_widgets.dart';
 import 'package:oxir_game/features/friends/presentation/screen/friends_screen.dart';
-import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 import 'package:oxir_game/features/home/presentation/screen/home_screen.dart';
 import 'package:oxir_game/features/nav_bar/nav_model.dart';
 import 'package:oxir_game/features/nav_bar/navbar_screen.dart';
+import 'package:oxir_game/features/selected/presentation/screen/sports_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -27,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     items = [
       NavModel(
-        page: const SportsScreen(),
+        page: const HomeScreen(),
         navkey: airdropNavKey,
       ),
       // NavModel(

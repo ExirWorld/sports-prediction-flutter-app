@@ -237,10 +237,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: CachedNetworkImage(
                                   imageUrl:
                                       '${Constants.baseUrl}${imgUrl.imageUrl!}',
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          CircularProgressIndicator(
-                                              value: downloadProgress.progress),
+                                  // progressIndicatorBuilder:
+                                  //     (context, url, downloadProgress) =>
+                                  //         CircularProgressIndicator(
+                                  //             value: downloadProgress.progress),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                   fit: BoxFit.cover,
@@ -526,10 +526,17 @@ Widget _contentInfo(
       ),
     ),
     child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 20,
+        const VerticalSpace(24),
+        const Padding(
+          padding: EdgeInsets.only(left: 16),
+          child: HugeBoldText(
+            'Your Active position',
+            textColorInLight: Colors.white,
+          ),
         ),
+        const VerticalSpace(8),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: SizedBox(
@@ -543,10 +550,10 @@ Widget _contentInfo(
                   CachedNetworkImage(
                     imageUrl:
                         '${Constants.baseUrl}${homePageEntity.ranksHeader?.teamImageUrl}',
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
+                    // progressIndicatorBuilder:
+                    //     (context, url, downloadProgress) =>
+                    //         CircularProgressIndicator(
+                    //             value: downloadProgress.progress),
                     errorWidget: (context, url, error) =>
                         const Icon(Icons.error),
                     fit: BoxFit.cover,
@@ -649,8 +656,14 @@ Widget _contentInfo(
             ),
           ),
         ),
-        const SizedBox(
-          height: 12,
+
+        const VerticalSpace(24),
+        const Padding(
+          padding: EdgeInsets.only(left: 16),
+          child: HugeBoldText(
+            'Users in Room',
+            textColorInLight: Colors.white,
+          ),
         ),
         ListView.builder(
           itemCount: homePageEntity.ranksUsersList?.length,
@@ -679,10 +692,10 @@ Widget _contentInfo(
                       borderRadius: BorderRadius.circular(8),
                       child: CachedNetworkImage(
                         imageUrl: '${Constants.baseUrl}${data.userImageUrl!}',
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) =>
-                                CircularProgressIndicator(
-                                    value: downloadProgress.progress),
+                        // progressIndicatorBuilder:
+                        //     (context, url, downloadProgress) =>
+                        //         CircularProgressIndicator(
+                        //             value: downloadProgress.progress),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                         fit: BoxFit.cover,

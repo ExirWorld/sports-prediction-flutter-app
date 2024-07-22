@@ -33,137 +33,148 @@ class _LeagueScreenState extends State<LeagueScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Center(
-          child: SingleChildScrollView(
-            child: HorizontalMarginContainer(
-              margin: 12,
-              child: BlocBuilder<SelectedBloc, SelectedState>(
-                buildWhen: (previous, current) {
-                  return current is GetLeaguesCompleted ||
-                          current is GetLeaguesError ||
-                          current is GetLeaguesLoading
-                      ? true
-                      : false;
-                },
-                builder: (context, state) {
-                  if (state is GetLeaguesCompleted) {
-                    return Column(
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.leagueEntity.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            final data = state.leagueEntity[index];
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 28),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => MatchScreen(
-                                          sportsEntity: widget.sportsEntity,
-                                          leagueEntity: data,
-                                        ),
-                                      ));
-                                },
-                                child: Stack(
-                                  clipBehavior: Clip.none,
-                                  alignment: Alignment.bottomCenter,
-                                  children: [
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                        border: Border(
-                                          top: BorderSide(
-                                            color: Color(0xffe9c475),
+      body: SafeArea(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Center(
+            child: SingleChildScrollView(
+              child: HorizontalMarginContainer(
+                margin: 12,
+                child: BlocBuilder<SelectedBloc, SelectedState>(
+                  buildWhen: (previous, current) {
+                    return current is GetLeaguesCompleted ||
+                            current is GetLeaguesError ||
+                            current is GetLeaguesLoading
+                        ? true
+                        : false;
+                  },
+                  builder: (context, state) {
+                    if (state is GetLeaguesCompleted) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const VerticalSpace(24),
+                          const HugeBoldText(
+                            'choose your League',
+                            textColorInLight: Colors.white,
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: state.leagueEntity.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              final data = state.leagueEntity[index];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 28),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MatchScreen(
+                                            sportsEntity: widget.sportsEntity,
+                                            leagueEntity: data,
+                                          ),
+                                        ));
+                                  },
+                                  child: Stack(
+                                    clipBehavior: Clip.none,
+                                    alignment: Alignment.bottomCenter,
+                                    children: [
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            top: BorderSide(
+                                              color: Color(0xffe9c475),
+                                            ),
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromARGB(
+                                                  255, 97, 70, 11),
+                                              spreadRadius: 1,
+                                              blurRadius: 20,
+                                              offset: Offset(0, -10),
+                                            ),
+                                          ],
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(24),
+                                            topRight: Radius.circular(24),
                                           ),
                                         ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Color.fromARGB(255, 97, 70, 11),
-                                            spreadRadius: 1,
-                                            blurRadius: 20,
-                                            offset: Offset(0, -10),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                          child: CachedNetworkImage(
+                                            imageUrl:
+                                                '${Constants.baseUrl}${data.leagueImageUrl!}',
+                                            progressIndicatorBuilder: (context,
+                                                    url, downloadProgress) =>
+                                                CircularProgressIndicator(
+                                                    value: downloadProgress
+                                                        .progress),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
+                                            fit: BoxFit.cover,
                                           ),
-                                        ],
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(24),
-                                          topRight: Radius.circular(24),
                                         ),
                                       ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(24),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              '${Constants.baseUrl}${data.leagueImageUrl!}',
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              CircularProgressIndicator(
-                                                  value: downloadProgress
-                                                      .progress),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: -35,
-                                      child: ClipRRect(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(24)),
-                                        child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 30, sigmaY: 30),
-                                          child: Container(
-                                            height: 75,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.5,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Colors.grey.withOpacity(0.1),
-                                              border: Border.all(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  width: 1),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(25),
+                                      Positioned(
+                                        bottom: -35,
+                                        child: ClipRRect(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(24)),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 30, sigmaY: 30),
+                                            child: Container(
+                                              height: 75,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.5,
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey
+                                                    .withOpacity(0.1),
+                                                border: Border.all(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    width: 1),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(25),
+                                                ),
+                                              ),
+                                              alignment: Alignment.center,
+                                              child: SmallText(
+                                                data.leagueName!,
+                                                textColorInLight:
+                                                    TEXT_LIGHT_COLOR,
                                               ),
                                             ),
-                                            alignment: Alignment.center,
-                                            child: SmallText(
-                                              data.leagueName!,
-                                              textColorInLight:
-                                                  TEXT_LIGHT_COLOR,
-                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        const VerticalSpace(120),
-                      ],
-                    );
-                  } else {
-                    return const Center(
-                        child: CupertinoActivityIndicator(
-                      color: WHITE_COLOR,
-                    ));
-                  }
-                },
+                              );
+                            },
+                          ),
+                          const VerticalSpace(120),
+                        ],
+                      );
+                    } else {
+                      return const Center(
+                          child: CupertinoActivityIndicator(
+                        color: WHITE_COLOR,
+                      ));
+                    }
+                  },
+                ),
               ),
             ),
           ),
