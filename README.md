@@ -1,4 +1,4 @@
-# oxir_game
+# exir_game
 
 A new Flutter project.
 
